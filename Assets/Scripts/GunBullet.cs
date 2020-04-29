@@ -8,7 +8,7 @@ public class GunBullet : MonoBehaviour
     private Player player = null;
     private float moveSpeed = 1f;
     private Rigidbody rigid = null;
-
+    private string unitTag;
 
     public void SetDamage(int damage)
     {
@@ -22,7 +22,7 @@ public class GunBullet : MonoBehaviour
         gameObject.SetActive(true);
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(Vector3.forward * Time.deltaTime * moveSpeed);
-        Invoke("DestroyObj", 10.0f);
+        Invoke("DestroyObj", 1.0f);
     }
 
     private void Update()
@@ -38,6 +38,19 @@ public class GunBullet : MonoBehaviour
             other.GetComponent<EnemyTower>().GetDamage(damage);
             gameObject.SetActive(false);
             DestroyObj();
+        }
+
+        if (gameObject.CompareTag("EnemyBullet"))
+        {
+            unitTag = "Character";
+        }
+        else if (gameObject.CompareTag("CharacterBullet"))
+        {
+            unitTag = "Enemy";
+        }
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag(unitTag))
+        {
+            GameObject.Destroy(gameObject, 0.0f);
         }
     }
 

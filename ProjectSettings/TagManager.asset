@@ -6,6 +6,13 @@ TagManager:
   tags:
   - TowerBullet
   - Tower
+  - RedWay
+  - Wall
+  - Ground
+  - Character
+  - Enemy
+  - CharacterBullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
