@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class TowerBullet : MonoBehaviour
 {
-    private int damage = 0;
+    private int damage;
     private Player player = null;
-    private float moveSpeed = 2f;
+    private float moveSpeed;
+    private float fieldOfFire;
+    private float existTime;
 
     public void SetDamage(int damage)
     {
         this.damage = damage;
+    }
+
+    public void SetmoveSpeed(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+    }
+
+    public void SetmovefieldOfFire(float fieldOfFire)
+    {
+        this.fieldOfFire = fieldOfFire;
     }
 
     public void SetPlayer(Player player)
@@ -20,15 +32,16 @@ public class TowerBullet : MonoBehaviour
 
     public void Fire()
     {
+        existTime = fieldOfFire / moveSpeed;
         transform.parent = null;
         gameObject.SetActive(true);
         transform.LookAt(player.transform.position);
-        Invoke("DestroyObj", 10.0f);
+        Invoke("DestroyObj", existTime);
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * 10 * moveSpeed, Space.Self);
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
     }
 
 

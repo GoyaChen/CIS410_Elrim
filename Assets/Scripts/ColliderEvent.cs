@@ -5,16 +5,23 @@ using UnityEngine;
 
 public class ColliderEvent : MonoBehaviour
 {
-    public Action<Collider> OnColliderTriggerEnter;
-    public Action<Collider> OnColliderTriggerExit;
+    public bool playerInRange;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider obj)
     {
-        OnColliderTriggerEnter?.Invoke(other);
+        if (obj.tag == "Player")
+        {
+            playerInRange = true;
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider obj)
     {
-        OnColliderTriggerExit?.Invoke(other);
+        if (obj.tag == "Player")
+        {
+            playerInRange = false;
+        }
     }
+
 }
+

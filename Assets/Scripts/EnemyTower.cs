@@ -8,40 +8,44 @@ using UnityEngine.UI;
 /// </summary>
 public class EnemyTower : MonoBehaviour
 {
-    [SerializeField] private Transform rotater = null;
+    [SerializeField] private Transform Rotator = null;
     [SerializeField] private ColliderEvent attackRangeDetector = null;
     [SerializeField] private Transform bulletPoint = null; //子弹点
     [SerializeField] private TowerBullet bulletPrefab = null; //炮弹
     [SerializeField] private Slider heathUI = null; //血条
     [SerializeField] private Transform heathBar = null; //血条UI
+    [Header("基础数据")]
+    [SerializeField]
+    public int MaxHP;//最大HP
+    public int Defense;//防御力
+    public float attackSpeed; //攻击速度
+    public int attackDamage;//伤害值
+    public float fieldOfFire;//射程
+    public float moveSpeed;//子弹速度
+    public bool ismagic;//是否是魔法攻击
 
     private Player player = null;
-    private bool playerInRange = false;
-    [Header("最大血量")]
-    [SerializeField]
-    private int MaxHP = 100;
-    [Header("当前血量")]
-    [SerializeField]
-    private int CurHP = 100;
-    private float attackSpeed = 70; //攻击速度
-    private int attackDamage = 10;//伤害值
+    private bool playerInRange;
+    private int CurHP;
     private float lastAttackTime = 0;
     private bool isDead = false;
+    private Vector3 _angles;
 
-    private void Awake()
+
+    void Awake()
     {
+        CurHP = MaxHP;
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        attackRangeDetector.OnColliderTriggerEnter += OnColliderTriggerEnter;
-        attackRangeDetector.OnColliderTriggerExit += OnColliderTriggerExit;
         heathUI.maxValue = MaxHP;
     }
 
-
-    private void Update()
+    void Update()
     {
+        playerInRange = attackRangeDetector.playerInRange;
         if (playerInRange && !isDead && !player.Dead)
         {
-            if (Time.time - lastAttackTime >= 100 / attackSpeed)
+            Rotator.LookAt(Rotator.transform.position + Rotator.position - player.transform.position);
+            if (Time.time - lastAttackTime >= attackSpeed)
             {
                 lastAttackTime = Time.time;
                 Attack();
@@ -53,11 +57,12 @@ public class EnemyTower : MonoBehaviour
 
     private void Attack()
     {
-        Vector3 pos = new Vector3(player.transform.position.x, rotater.position.y, rotater.transform.position.z);
-        rotater.LookAt(pos);
+
         TowerBullet newBullet = Instantiate(bulletPrefab, bulletPoint.transform.position, bulletPoint.transform.rotation, bulletPoint.transform.parent);
         newBullet.SetDamage(attackDamage);
         newBullet.SetPlayer(player);
+        newBullet.SetmovefieldOfFire(fieldOfFire);
+        newBullet.SetmoveSpeed(moveSpeed);
         newBullet.Fire();
     }
 
@@ -66,30 +71,20 @@ public class EnemyTower : MonoBehaviour
     {
         if (CurHP - value > 0)
         {
-            CurHP -= value;
+            if (ismagic)
+            {
+                CurHP -= value;
+            }
+            else
+            {
+                CurHP -= (value - Defense);
+            }
+
         }
         else
         {
             CurHP = 0;
             isDead = true;
         }
-      
     }
-
-
-    private void OnColliderTriggerEnter(Collider obj)
-    {
-        if(obj.tag == "Player")
-        {
-            playerInRange = true;
-        }
-    }
-    private void OnColliderTriggerExit(Collider obj)
-    {
-        if (obj.tag == "Player")
-        {
-            playerInRange = false;
-        }
-    }
-
 }
