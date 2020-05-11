@@ -12,6 +12,10 @@ public class EnemyTower : MonoBehaviour
     [SerializeField] private ColliderEvent attackRangeDetector = null;
     [SerializeField] private GameObject fireEffect = null;//开火效果
     [SerializeField] private ParticleSystem particleEffect = null;//粒子开火效果
+    [SerializeField] private AudioSource fireAudio = null;//开火音效
+    [SerializeField] private AudioSource continueFireAudio = null;//持续开火音效
+    [SerializeField] private ParticleSystem deadEffect = null;//死亡效果
+    [SerializeField] private AudioSource deadAudio = null;//死亡音效
     [SerializeField] private Transform bulletPoint = null; //子弹点
     [SerializeField] private TowerBullet bulletPrefab = null; //炮弹
     [SerializeField] private Slider heathUI = null; //血条
@@ -33,13 +37,14 @@ public class EnemyTower : MonoBehaviour
     private float lastAttackTime = 0;
     private bool isDead = false;
     private Vector3 _angles;
-
+    private bool isfireAudioOn;
 
     void Awake()
     {
         CurHP = MaxHP;
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         heathUI.maxValue = MaxHP;
+        isfireAudioOn = false;
     }
 
     void Update()
@@ -52,27 +57,37 @@ public class EnemyTower : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 Attack();
-                if (particleEffect != null)
-                {
-                    particleEffect.Play();
-                }
+                if (particleEffect != null) particleEffect.Play();
+                if (fireAudio != null) fireAudio.Play();
             }
-            if (fireEffect != null)
+            if (!isfireAudioOn)
             {
-                fireEffect.SetActive(true);
+                if (continueFireAudio != null) continueFireAudio.Play();
+                isfireAudioOn = true;
             }
-            
+            if (fireEffect != null) fireEffect.SetActive(true);
 
         }
         else
         {
-            if (fireEffect != null)
+            if (fireEffect != null) fireEffect.SetActive(false);
+            if (particleEffect != null) particleEffect.Stop();
+            if (isfireAudioOn)
             {
-                fireEffect.SetActive(false);
+                if (continueFireAudio != null) continueFireAudio.Stop();
+                isfireAudioOn = false;
             }
+           
         }
         heathUI.value = CurHP;
         heathBar.LookAt(heathBar.position + heathBar.position - player.transform.position);
+
+        if (isDead)
+        {
+            if(deadEffect != null) deadEffect.Play();
+            if (deadAudio != null) deadAudio.Play();
+            Destroy(gameObject, 2.0f);
+        }
     }
 
     private void Attack()
