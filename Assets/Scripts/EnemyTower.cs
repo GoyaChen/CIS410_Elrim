@@ -108,4 +108,9 @@ public class EnemyTower : MonoBehaviour
             isDead = true;
         }
     }
+
+    public bool GetCanRotate()
+    {
+        return !playerInRange && !isDead && !player.Dead;
+    }
 }
