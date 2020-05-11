@@ -10,6 +10,8 @@ public class EnemyTower : MonoBehaviour
 {
     [SerializeField] private Transform Rotator = null;
     [SerializeField] private ColliderEvent attackRangeDetector = null;
+    [SerializeField] private GameObject fireEffect = null;//开火效果
+    [SerializeField] private ParticleSystem particleEffect = null;//粒子开火效果
     [SerializeField] private Transform bulletPoint = null; //子弹点
     [SerializeField] private TowerBullet bulletPrefab = null; //炮弹
     [SerializeField] private Slider heathUI = null; //血条
@@ -20,6 +22,7 @@ public class EnemyTower : MonoBehaviour
     public int Defense;//防御力
     public float attackSpeed; //攻击速度
     public int attackDamage;//伤害值
+    public int explodeDamage = 0;//爆炸伤害
     public float fieldOfFire;//射程
     public float moveSpeed;//子弹速度
     public bool ismagic;//是否是魔法攻击
@@ -49,10 +52,27 @@ public class EnemyTower : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 Attack();
+                if (particleEffect != null)
+                {
+                    particleEffect.Play();
+                }
+            }
+            if (fireEffect != null)
+            {
+                fireEffect.SetActive(true);
+            }
+            
+
+        }
+        else
+        {
+            if (fireEffect != null)
+            {
+                fireEffect.SetActive(false);
             }
         }
         heathUI.value = CurHP;
-        heathBar.LookAt(heathBar.transform.position + heathBar.transform.position - player.transform.position);
+        heathBar.LookAt(heathBar.position + heathBar.position - player.transform.position);
     }
 
     private void Attack()
@@ -60,6 +80,7 @@ public class EnemyTower : MonoBehaviour
 
         TowerBullet newBullet = Instantiate(bulletPrefab, bulletPoint.transform.position, bulletPoint.transform.rotation, bulletPoint.transform.parent);
         newBullet.SetDamage(attackDamage);
+        newBullet.SetExplodeDamage(explodeDamage);
         newBullet.SetPlayer(player);
         newBullet.SetmovefieldOfFire(fieldOfFire);
         newBullet.SetmoveSpeed(moveSpeed);
