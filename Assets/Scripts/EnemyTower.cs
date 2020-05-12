@@ -38,6 +38,7 @@ public class EnemyTower : MonoBehaviour
     private bool isDead = false;
     private Vector3 _angles;
     private bool isfireAudioOn;
+    private bool isDeadAudioOn;
 
     void Awake()
     {
@@ -45,6 +46,8 @@ public class EnemyTower : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         heathUI.maxValue = MaxHP;
         isfireAudioOn = false;
+        isDeadAudioOn = false;
+        if (deadEffect != null) deadEffect.Stop();
     }
 
     void Update()
@@ -85,8 +88,12 @@ public class EnemyTower : MonoBehaviour
         if (isDead)
         {
             if(deadEffect != null) deadEffect.Play();
-            if (deadAudio != null) deadAudio.Play();
-            Destroy(gameObject, 2.0f);
+            if (!isDeadAudioOn)
+            {
+                if (deadAudio != null) deadAudio.Play();
+                isDeadAudioOn = true;
+            }
+            Destroy(gameObject, 1.5f);
         }
     }
 
