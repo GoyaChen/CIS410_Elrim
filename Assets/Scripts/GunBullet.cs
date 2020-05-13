@@ -9,6 +9,7 @@ public class GunBullet : MonoBehaviour
     private float moveSpeed = 1f;
     private Rigidbody rigid = null;
     private string unitTag;
+    private bool isDamageMagic;
 
     public void SetDamage(int damage)
     {
@@ -35,7 +36,7 @@ public class GunBullet : MonoBehaviour
     {
         if (other.tag == "Tower")
         {
-            other.GetComponent<EnemyTower>().GetDamage(damage);
+            other.GetComponent<EnemyController>().GetDamage(damage, isDamageMagic);
             gameObject.SetActive(false);
             DestroyObj();
         }

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private bool isDead = false; //是否已死亡
     private int ATK = 10; //攻击力
     private float attackSpeed = 500; //攻击速度
+    public int dafense;
 
     private float lastAttackTime = 0;
 
@@ -138,12 +139,20 @@ public class Player : MonoBehaviour
     }
 
 
-    public void GetDamage(int value)
+    public void GetDamage(int value, bool isDamageMagic)
     {
         if (HP == 0) return;
         if (HP - value > 0)
         {
-            HP -= value;
+            if (isDamageMagic)
+            {
+                HP -= value;
+            }
+            else
+            {
+                HP -= (value-dafense);
+            }
+            
         }
         else
         {

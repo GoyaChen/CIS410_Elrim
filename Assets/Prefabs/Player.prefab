@@ -434,6 +434,7 @@ MonoBehaviour:
   bulletPoint: {fileID: 4585338643268412516}
   MaxHP: 100
   HP: 100
+  dafense: 0
 --- !u!1 &4585338643268412517
 GameObject:
   m_ObjectHideFlags: 0

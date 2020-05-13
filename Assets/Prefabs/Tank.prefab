@@ -195,7 +195,7 @@ Transform:
   - {fileID: 5391531102564413907}
   - {fileID: 7880265979941523465}
   m_Father: {fileID: 5556946946650616265}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1104360807066621044
 GameObject:
@@ -254,8 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8a2f4a8a630ea449fb5f3bfd9641d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 0}
-  ExplodeDamage: 0
+  damageEffect: {fileID: 0}
 --- !u!1 &1205321033279179705
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,11 +438,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144492030585109819}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 0.005000001, y: 0.0050000004, z: 5}
   m_Children: []
-  m_Father: {fileID: 5556946946040807800}
+  m_Father: {fileID: 5556946946650616265}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &1880935845761158386
@@ -6024,9 +6023,8 @@ RectTransform:
   m_LocalScale: {x: 0.005000001, y: 0.0050000004, z: 5}
   m_Children:
   - {fileID: 5556946946878511473}
-  - {fileID: 7763240579952169198}
   m_Father: {fileID: 5556946946650616265}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6231,7 +6229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af73902a39dff1a479184d456dfd8d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletHit: {fileID: 1104360807066621044}
+  explodeDamager: {fileID: 0}
 --- !u!33 &992117089254043202
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6491,7 +6489,7 @@ Transform:
   - {fileID: 400789433744599516}
   - {fileID: 4847270481252415446}
   m_Father: {fileID: 5556946946650616265}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5556946946650454635
 GameObject:
@@ -6506,7 +6504,7 @@ GameObject:
   - component: {fileID: 5556946946650454634}
   m_Layer: 0
   m_Name: Tank
-  m_TagString: Tower
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6523,6 +6521,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3546419211642716510}
+  - {fileID: 7763240579952169198}
   - {fileID: 5556946946650549335}
   - {fileID: 5556946946040807800}
   - {fileID: 5722133967414569995}
@@ -6552,16 +6551,16 @@ MonoBehaviour:
   bulletPoint: {fileID: 5556946945747039149}
   bulletPrefab: {fileID: 5556946946530248061}
   heathUI: {fileID: 5556946946878511472}
-  heathBar: {fileID: 5556946946040807800}
+  heathBar: {fileID: 5556946946040807801}
   MaxHP: 1000
   Defense: 100
-  attackSpeed: 1.62
+  attackSpeed: 1.5
   attackDamage: 200
   explodeDamage: 0
   fieldOfFire: 12
   moveSpeed: 100
   ismagic: 0
-  isDead: 0
+  visibleDistance: 400
 --- !u!65 &5556946946650454634
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,38 +4,93 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float scale;
-    public float damage;
-    public bool ismagic;
+    public GameObject explodeDamager = null;//着弹
+    private int damage;
+    private int explodDamage;
+    private float moveSpeed;
+    private float fieldOfFire;
+    private float existTime;
+    private bool isDamage;
+    private bool isDamageMagic;
+    private GameObject player = null;
 
-    private string unitTag;
-    // Start is called before the first frame update
-    void Start()
+    public void SetDamage(int damage)
     {
-        
+        this.damage = damage;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetisDamageMagic(bool isDamageMagic)
     {
-        GameObject.Destroy(gameObject, scale);
+        this.isDamageMagic = isDamageMagic;
     }
 
-    void OnTriggerEnter(Collider other)
+    public void SetExplodeDamage(int explodeDamage)
     {
-        if (gameObject.CompareTag("EnemyBullet"))
+        this.explodDamage = explodeDamage;
+    }
+
+    public void SetmoveSpeed(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+    }
+
+    public void SetmovefieldOfFire(float fieldOfFire)
+    {
+        this.fieldOfFire = fieldOfFire;
+    }
+
+    public void Fire()
+    {
+        existTime = fieldOfFire / moveSpeed;
+        transform.parent = null;
+        gameObject.SetActive(true);
+        player = GameObject.FindWithTag("Player");
+        if (player != null) transform.LookAt(player.transform.position);
+        Invoke("DestroyObj", existTime);
+    }
+
+    private void Start()
+    {
+        isDamage = true;
+    }
+
+    private void Update()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
         {
-            unitTag = "Character";
+            if (isDamage)
+            {
+                other.GetComponent<PlayerController>().GetDamage(damage, isDamageMagic);
+                isDamage = false;
+            }
+            if (explodeDamager != null) Explode();
+            DestroyObj();
         }
-        else if(gameObject.CompareTag("CharacterBullet"))
+        else if (other.tag == "Wall" || other.tag == "Ground")
         {
-            unitTag = "Enemy";
+            if (explodeDamager != null) Explode();
+            DestroyObj();
         }
-        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag(unitTag))
-        {
-            GameObject.Destroy(gameObject,0.0f);
-        }
+    }
+
+    private void Explode()
+    {
+        GameObject newBullethit = Instantiate(explodeDamager, transform.position, transform.rotation);
+        newBullethit.SetActive(true);
+        newBullethit.tag = this.tag;
+        DamagerControler newDamageController = newBullethit.GetComponent<DamagerControler>();
+        newDamageController.SetDamage(explodDamage);
+        newDamageController.SetisMagic(isDamageMagic);
+    }
+
+    private void DestroyObj()
+    {
+        Destroy(gameObject);
     }
 }
-
-   
