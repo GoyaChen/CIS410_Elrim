@@ -44,8 +44,11 @@ public class BulletController : MonoBehaviour
         existTime = fieldOfFire / moveSpeed;
         transform.parent = null;
         gameObject.SetActive(true);
-        player = GameObject.FindWithTag("Player");
-        if (player != null) transform.LookAt(player.transform.position);
+        if (tag == "Enermy")
+        {
+            player = GameObject.FindWithTag("Player");
+            if (player != null) transform.LookAt(player.transform.position);
+        }
         Invoke("DestroyObj", existTime);
     }
 
@@ -62,17 +65,45 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if(tag == "EnemyBullet")
         {
-            if (isDamage)
+            if (other.tag == "Player")
             {
-                other.GetComponent<PlayerController>().GetDamage(damage, isDamageMagic);
-                isDamage = false;
+                if (isDamage)
+                {
+                    print(damage);
+                    other.GetComponent<PlayerController>().GetDamage(damage, isDamageMagic);
+                    isDamage = false;
+                }
+                if (explodeDamager != null) Explode();
+                DestroyObj();
             }
-            if (explodeDamager != null) Explode();
-            DestroyObj();
         }
-        else if (other.tag == "Wall" || other.tag == "Ground")
+        
+        if(tag == "PlayerBullet")
+        {
+            if (other.tag == "Enemy")
+            {
+                if (isDamage)
+                {
+                    other.GetComponent<EnemyController>().GetDamage(damage, isDamageMagic);
+                    isDamage = false;
+                }
+                if (explodeDamager != null) Explode();
+                DestroyObj();
+            }else if(other.tag == "Blocker")
+            {
+                if (isDamage)
+                {
+                    other.GetComponent<BlockerController>().GetDamage(damage, isDamageMagic);
+                    isDamage = false;
+                }
+                if (explodeDamager != null) Explode();
+                DestroyObj();
+            }
+        }
+       
+        if (other.tag == "Wall" || other.tag == "Ground")
         {
             if (explodeDamager != null) Explode();
             DestroyObj();

@@ -20,15 +20,14 @@ public class DamagerControler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(this.tag);
-        if (tag == "Enemy")
+        if (tag == "EnemyBllet")
         {
             if (other.tag == "Player")
             {
                 if (isDamage) other.GetComponent<PlayerController>().GetDamage(damage, isMagic);                  
             }
         }
-        else if(tag == "Player")
+        else if(tag == "PlayerBullet")
         {
             if (other.tag == "Enemy")
             {

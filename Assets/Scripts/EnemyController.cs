@@ -123,7 +123,7 @@ public class EnemyController : MonoBehaviour
         newBullet.SetExplodeDamage(explodeDamage);
         newBullet.SetmovefieldOfFire(fieldOfFire);
         newBullet.SetmoveSpeed(moveSpeed);
-        newBullet.tag = this.tag;
+        newBullet.tag = "EnemyBullet";
         newBullet.Fire();
     }
 

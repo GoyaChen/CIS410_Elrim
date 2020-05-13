@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform cameraTrans = null;
     [SerializeField] private Transform wayPointsParent = null; //路径
     [SerializeField] private Transform gunTrans = null;
-    [SerializeField] private GunBullet bulletPrefab = null;
     [SerializeField] private Transform bulletPoint = null;
 
     public Action OnChangeRed = null;
@@ -80,9 +79,6 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime >= 100 / attackSpeed)
         {
             lastAttackTime = Time.time;
-            GunBullet newBullet = Instantiate(bulletPrefab, bulletPoint.position, bulletPoint.rotation, bulletPoint.transform.parent);
-            newBullet.SetDamage(ATK);
-            newBullet.Fire();
         }
     }
 
@@ -124,7 +120,7 @@ public class Player : MonoBehaviour
     private void GunControl()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 point = ray.GetPoint(2);
+        Vector3 point = ray.GetPoint(3);
         gunTrans.LookAt(point);
     }
 

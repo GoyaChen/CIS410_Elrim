@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - CharacterBullet
   - EnemyBullet
+  - target
   layers:
   - Default
   - TransparentFX
