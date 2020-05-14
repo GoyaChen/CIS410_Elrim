@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject Camera = null;
     [SerializeField] private Transform DamagerPoint = null;//攻击器产生点（群攻时使用）
-    [SerializeField] private DamagerControler Damager = null;//攻击器（群攻时使用）
+    [SerializeField] private GameObject Damager = null;//攻击器（群攻时使用）
     [SerializeField] private Transform bulletPoint = null; //子弹点
-    [SerializeField] private BulletController bulletPrefab = null; //炮弹
+    [SerializeField] private GameObject bulletPrefab = null; //炮弹
     [SerializeField] private ParticleSystem fireEffect = null;//开火效果
     [SerializeField] private AudioSource fireAudio = null;//开火音效
     [SerializeField] private ParticleSystem deadEffect = null;//死亡效果
@@ -23,9 +24,12 @@ public class PlayerController : MonoBehaviour
     public float attackSpeed; //攻击速度
     public int attackDamage;//伤害值
     public int explodeDamage = 0;//爆炸伤害
+    public int conDamage = 0;//持续伤害
     public float fieldOfFire;//射程
     public float bulletSpeed;//子弹速度
     public bool ismagic;//是否是魔法攻击
+    public float firstAttactDelay;
+    
 
     public int currHP;
     private bool isDead;
@@ -35,10 +39,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private Vector3 m_Movement;
     private CharacterController characterController = null;
+    private float timer;
+    private bool isfirstAttact = true;
+    public float mouseSensitivity = 10;
 
     public int CurrentHealth { get { return currHP; } }
     public int MaxHealth { get { return maxHP; } }
     public bool Dead { get { return isDead; } }
+    public Vector3 CurrPostition { get { return transform.position; } }
 
     // Start is called before the first frame update
     void Start()
@@ -50,20 +58,50 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         bulletPointRotate();
         Cursor.visible = false;
+        fireEffect.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isDead) return;
+        if (currHP == 0) Die();
         if (characterController.isGrounded == false)
         {
             characterController.Move(-Vector3.up * 1.0f * Time.deltaTime);
         }
         CameraControl();
         Move();
-        bulletPointRotate();
-        Attack();
+        if(bulletPoint != null && bulletPrefab != null) bulletPointRotate();
+        if (m_Animator.GetBool("Aiming"))
+        {
+            if (isfirstAttact)
+            {
+                timer += Time.deltaTime;
+                if (timer > firstAttactDelay)
+                {
+                    Attack();
+                    isfirstAttact = false;
+                    timer = 0;
+                }
+            }
+            else
+            {
+                Attack();
+            }
+
+        }
+        else
+        {
+            isfirstAttact = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "target")
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 
     public void GetDamage(int value, bool isDamageMagic)
@@ -77,7 +115,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                currHP -= (value - defense);
+                currHP -= (((value - defense) >= 0) ? (value - defense) : 0);
             }
         }
         else
@@ -95,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
         bool hasHorizontalInput = !Mathf.Approximately(h, 0f);
         bool hasVerticalInput = !Mathf.Approximately(v, 0f);
-        bool isWalking = hasHorizontalInput || hasVerticalInput;
+        isWalking = hasHorizontalInput || hasVerticalInput;
         if (isWalking)
         {
             m_Animator.SetBool("Aiming", false);
@@ -114,8 +152,8 @@ public class PlayerController : MonoBehaviour
     {
         float x = Input.GetAxis("Mouse X");
         float y = Input.GetAxis("Mouse Y");
-        transform.Rotate(transform.up * x * Time.deltaTime * 100 * rotateSpeed, Space.World);
-        Camera.transform.Rotate(-Camera.transform.right * y * Time.deltaTime * 100 * rotateSpeed, Space.World);
+        transform.Rotate(transform.up * x * Time.deltaTime * mouseSensitivity * rotateSpeed, Space.World);
+        Camera.transform.Rotate(-Camera.transform.right * y * Time.deltaTime * mouseSensitivity * rotateSpeed, Space.World);
     }
 
     private void bulletPointRotate()
@@ -130,14 +168,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime >= attackSpeed)
         {
             lastAttackTime = Time.time;
-            if (fireEffect != null) fireEffect.Play();
+            m_Animator.SetTrigger("Attack");
+            if (fireEffect != null)
+            {
+                fireEffect.gameObject.SetActive(true);
+                fireEffect.Play();
+            }
+
             if (fireAudio != null) fireAudio.Play();
             if (bulletPoint != null && bulletPrefab != null)
             {
-                BulletController newBullet = Instantiate(bulletPrefab, bulletPoint.position, bulletPoint.rotation, bulletPoint.transform.parent);
+                GameObject newBulletPrefeb = Instantiate(bulletPrefab, bulletPoint.position, bulletPoint.rotation, bulletPoint.transform.parent);
+                newBulletPrefeb.SetActive(true);
+                BulletController newBullet = newBulletPrefeb.GetComponent<BulletController>();
                 newBullet.SetDamage(attackDamage);
                 newBullet.SetisDamageMagic(ismagic);
                 newBullet.SetExplodeDamage(explodeDamage);
+                newBullet.SetConDamage(conDamage);
                 newBullet.SetmovefieldOfFire(fieldOfFire);
                 newBullet.SetmoveSpeed(bulletSpeed);
                 newBullet.tag = "PlayerBullet";
@@ -145,17 +192,30 @@ public class PlayerController : MonoBehaviour
             }
             else if(Damager != null)
             {
-                DamagerControler newDamager = Instantiate(Damager, DamagerPoint.position, DamagerPoint.rotation, DamagerPoint.parent);
-                newDamager.SetDamage(attackDamage);
-                newDamager.SetisMagic(ismagic);
+                
+                GameObject newDamager = Instantiate(Damager, DamagerPoint.position, DamagerPoint.rotation, DamagerPoint.parent);
+                newDamager.SetActive(true);
+                DamagerControler damagerControler = newDamager.GetComponent<DamagerControler>();
+                damagerControler.SetDamage(attackDamage);
+                damagerControler.SetisMagic(ismagic);
+                damagerControler.SetConDamage(conDamage);
                 newDamager.tag = "PlayerBullet";
             }
-            
         }
     }
 
     private void Die()
     {
         isDead = true;
+        m_Animator.SetTrigger("Death");
+        deadAudio.Play();
+        deadEffect.Play();
+        timer += Time.deltaTime;
+        if (timer > 3.0f) gameObject.SetActive(false);
+    }
+
+    public void SetcurHP(int currHP)
+    {
+        this.currHP = currHP;
     }
 }

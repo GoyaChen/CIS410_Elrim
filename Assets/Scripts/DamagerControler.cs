@@ -5,38 +5,49 @@ using UnityEngine;
 public class DamagerControler : MonoBehaviour
 {
     public ParticleSystem damageEffect = null;
+    public float disappearTime;
 
     private int damage;
+    private int conDamage;
     private bool isMagic;
 
-    private bool isDamage;
+    private bool isDamaged;
 
     private void Start()
     {
-        isDamage = true;
+        isDamaged = false;
         if (damageEffect != null) damageEffect.Play();
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, disappearTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (tag == "EnemyBllet")
+        print(damage);
+        print(isMagic);
+        if (tag == "EnemyBullet")
         {
             if (other.tag == "Player")
             {
-                if (isDamage) other.GetComponent<PlayerController>().GetDamage(damage, isMagic);                  
+                other.GetComponent<PlayerController>().GetDamage(conDamage, isMagic);
+                if (!isDamaged) other.GetComponent<PlayerController>().GetDamage(damage, isMagic);
+                isDamaged = true;
             }
         }
         else if(tag == "PlayerBullet")
         {
             if (other.tag == "Enemy")
             {
-                if (isDamage) other.GetComponent<EnemyController>().GetDamage(damage, isMagic);
-
+                other.GetComponent<EnemyController>().GetDamage(conDamage, isMagic);
+                if (!isDamaged) other.GetComponent<EnemyController>().GetDamage(damage, isMagic);
+                isDamaged = true;
+            }else if (other.tag == "Blocker")
+            {
+                other.GetComponent<BlockerController>().GetDamage(conDamage, isMagic);
+                if (!isDamaged) other.GetComponent<BlockerController>().GetDamage(damage, isMagic);
+                isDamaged = true;
             }
+            
         }
-        isDamage = false;
-
     }
 
     public void SetDamage(int damage)
@@ -47,6 +58,11 @@ public class DamagerControler : MonoBehaviour
     public void SetisMagic(bool isMagic)
     {
         this.isMagic = isMagic;
+    }
+
+    public void SetConDamage(int conDamage)
+    {
+        this.conDamage = conDamage;
     }
    
 }

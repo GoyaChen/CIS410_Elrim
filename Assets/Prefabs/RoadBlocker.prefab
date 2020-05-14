@@ -100,8 +100,8 @@ MonoBehaviour:
   heathUI: {fileID: 1051944005781717333}
   heathBar: {fileID: 5603319482603818546}
   MaxHP: 1000
-  Defense: 100
-  visibleDistance: 400
+  Defense: 70
+  visibleDistance: 625
 --- !u!65 &8407888757109069324
 BoxCollider:
   m_ObjectHideFlags: 0

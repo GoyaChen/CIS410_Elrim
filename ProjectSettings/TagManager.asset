@@ -11,9 +11,10 @@ TagManager:
   - Ground
   - Character
   - Enemy
-  - CharacterBullet
   - EnemyBullet
   - target
+  - Blocker
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

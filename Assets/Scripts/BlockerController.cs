@@ -34,7 +34,7 @@ public class BlockerController : MonoBehaviour
 
     void Update()
     {
-        if (player == null) player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         if(player != null)
         {
             distance = (player.transform.position - transform.position).sqrMagnitude;
@@ -58,7 +58,7 @@ public class BlockerController : MonoBehaviour
                     if (deadAudio != null) deadAudio.Play();
                     isDeadAudioOn = true;
                 }
-                Destroy(gameObject, 1.5f);
+                Destroy(gameObject);
             }
         }
     }

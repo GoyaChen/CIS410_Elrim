@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 515979227986917065}
   m_Layer: 0
   m_Name: BulletHit
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageEffect: {fileID: 0}
+  disappearTime: 0
 --- !u!1 &3680162527368815413
 GameObject:
   m_ObjectHideFlags: 0
@@ -10680,7 +10681,7 @@ GameObject:
   - component: {fileID: 8997288671910418125}
   m_Layer: 0
   m_Name: TowerBullet
-  m_TagString: TowerBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10693,7 +10694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4780833595001976982}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.6, z: -1.225}
+  m_LocalPosition: {x: 0, y: 0.722, z: -1.225}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 5551497425587549514}
@@ -10784,7 +10785,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4780833595001976982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af73902a39dff1a479184d456dfd8d14, type: 3}
+  m_Script: {fileID: 11500000, guid: ec984d3e2e269e14db0615bafb04f279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explodeDamager: {fileID: 0}
@@ -10837,7 +10838,7 @@ GameObject:
   - component: {fileID: 5551497424680889009}
   m_Layer: 0
   m_Name: TowerBulletPoint
-  m_TagString: TowerBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10849,13 +10850,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551497424680889011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: -1.225}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.729, z: -1.225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5551497425587549514}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!135 &5551497424680889014
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11211,18 +11212,19 @@ MonoBehaviour:
   deadEffect: {fileID: 8677509775113646333}
   deadAudio: {fileID: 2542678077782537380}
   bulletPoint: {fileID: 5551497424680889008}
-  bulletPrefab: {fileID: 8997288671910418125}
+  bulletPrefab: {fileID: 4780833595001976982}
   heathUI: {fileID: 5551497425812357229}
   heathBar: {fileID: 5551497424974665828}
-  MaxHP: 100
+  MaxHP: 400
   Defense: 10
   attackSpeed: 0.1
-  attackDamage: 10
+  attackDamage: 20
   explodeDamage: 0
+  conDamage: 0
   fieldOfFire: 8
   moveSpeed: 100
   ismagic: 0
-  visibleDistance: 400
+  visibleDistance: 625
 --- !u!65 &5551497425587446647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21409,7 +21411,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7917088197599530827}
-  m_LocalRotation: {x: 0.12186928, y: 0, z: 0, w: 0.9925462}
+  m_LocalRotation: {x: 0.06975647, y: 0, z: 0, w: 0.9975641}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -21419,7 +21421,7 @@ Transform:
   - {fileID: 8420669224920804545}
   m_Father: {fileID: 4850423401692622539}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 14, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 8, y: 0, z: 0}
 --- !u!1 &8000650633508093218
 GameObject:
   m_ObjectHideFlags: 0

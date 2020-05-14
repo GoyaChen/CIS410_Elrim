@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private ParticleSystem deadEffect = null;//死亡效果
     [SerializeField] private AudioSource deadAudio = null;//死亡音效
     [SerializeField] private Transform bulletPoint = null; //子弹点
-    [SerializeField] private BulletController bulletPrefab = null; //炮弹
+    [SerializeField] private GameObject bulletPrefab = null; //炮弹
     [SerializeField] private Slider heathUI = null; //血条
     [SerializeField] private GameObject heathBar = null; //血条UI
     [Header("基础数据")]
@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
     public float attackSpeed; //攻击速度
     public int attackDamage;//伤害值
     public int explodeDamage = 0;//爆炸伤害
+    public int conDamage = 0;//持续伤害
     public float fieldOfFire;//射程
     public float moveSpeed;//子弹速度
     public bool ismagic;//是否是魔法攻击
@@ -54,7 +55,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (player == null) player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         if (player != null)
         {
             playerInRange = attackRangeDetector.playerInRange;
@@ -87,6 +88,7 @@ public class EnemyController : MonoBehaviour
                 }
 
             }
+
             distance = (player.transform.position - transform.position).sqrMagnitude;
             if (distance < visibleDistance)
             {
@@ -117,10 +119,12 @@ public class EnemyController : MonoBehaviour
     private void Attack()
     {
 
-        BulletController newBullet = Instantiate(bulletPrefab, bulletPoint.transform.position, bulletPoint.transform.rotation, bulletPoint.transform.parent);
+        GameObject newBulletPreb = Instantiate(bulletPrefab, bulletPoint.transform.position, bulletPoint.transform.rotation, bulletPoint.transform.parent);
+        BulletController newBullet = newBulletPreb.GetComponent<BulletController>();
         newBullet.SetDamage(attackDamage);
         newBullet.SetisDamageMagic(ismagic);
         newBullet.SetExplodeDamage(explodeDamage);
+        newBullet.SetConDamage(conDamage);
         newBullet.SetmovefieldOfFire(fieldOfFire);
         newBullet.SetmoveSpeed(moveSpeed);
         newBullet.tag = "EnemyBullet";
@@ -138,7 +142,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                CurHP -= (value - Defense);
+                CurHP -= ((value - Defense) >= 0 ? (value - Defense) : 0);
             }
 
         }

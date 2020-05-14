@@ -5194,7 +5194,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &940409628432519169
 MonoBehaviour:
@@ -5209,6 +5209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageEffect: {fileID: 3449152864014776164}
+  disappearTime: 1.5
 --- !u!1 &6281960789559931847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5466,18 +5467,19 @@ MonoBehaviour:
   deadEffect: {fileID: 2909269553276624425}
   deadAudio: {fileID: 7695123078109178349}
   bulletPoint: {fileID: 6281960790693370136}
-  bulletPrefab: {fileID: 7419725536692381029}
+  bulletPrefab: {fileID: 6375986169669536574}
   heathUI: {fileID: 6281960789559931845}
   heathBar: {fileID: 6281960790936267724}
-  MaxHP: 100
+  MaxHP: 300
   Defense: 10
   attackSpeed: 1
   attackDamage: 10
-  explodeDamage: 500
+  explodeDamage: 300
+  conDamage: 0
   fieldOfFire: 15
-  moveSpeed: 15
+  moveSpeed: 10
   ismagic: 0
-  visibleDistance: 400
+  visibleDistance: 625
 --- !u!65 &6281960790321713375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5849,7 +5851,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6375986169669536574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af73902a39dff1a479184d456dfd8d14, type: 3}
+  m_Script: {fileID: 11500000, guid: ec984d3e2e269e14db0615bafb04f279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explodeDamager: {fileID: 4537210091867390166}

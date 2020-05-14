@@ -7,6 +7,7 @@ public class BulletController : MonoBehaviour
     public GameObject explodeDamager = null;//着弹
     private int damage;
     private int explodDamage;
+    private int conDamage;
     private float moveSpeed;
     private float fieldOfFire;
     private float existTime;
@@ -17,6 +18,11 @@ public class BulletController : MonoBehaviour
     public void SetDamage(int damage)
     {
         this.damage = damage;
+    }
+
+    public void SetConDamage(int conDamage)
+    {
+        this.conDamage = conDamage;
     }
 
     public void SetisDamageMagic(bool isDamageMagic)
@@ -65,13 +71,13 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(tag);
         if(tag == "EnemyBullet")
         {
             if (other.tag == "Player")
             {
                 if (isDamage)
                 {
-                    print(damage);
                     other.GetComponent<PlayerController>().GetDamage(damage, isDamageMagic);
                     isDamage = false;
                 }
@@ -102,11 +108,13 @@ public class BulletController : MonoBehaviour
                 DestroyObj();
             }
         }
-       
-        if (other.tag == "Wall" || other.tag == "Ground")
+        if(!isDamageMagic)
         {
-            if (explodeDamager != null) Explode();
-            DestroyObj();
+            if (other.tag == "Wall" || other.tag == "Ground")
+            {
+                if (explodeDamager != null) Explode();
+                DestroyObj();
+            }
         }
     }
 
@@ -118,6 +126,7 @@ public class BulletController : MonoBehaviour
         DamagerControler newDamageController = newBullethit.GetComponent<DamagerControler>();
         newDamageController.SetDamage(explodDamage);
         newDamageController.SetisMagic(isDamageMagic);
+        newDamageController.SetConDamage(conDamage);
     }
 
     private void DestroyObj()
