@@ -1686,6 +1686,11 @@ PrefabInstance:
       propertyPath: fieldOfFire
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8544825849789872441, guid: d6bb6a235d481d34e8f0a501bd98feaa,
+        type: 3}
+      propertyPath: firstAttactDelay
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8544825849789872442, guid: d6bb6a235d481d34e8f0a501bd98feaa,
         type: 3}
       propertyPath: m_Name
@@ -1809,12 +1814,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 177107620}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &179606381 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2373478945509697364, guid: b99cec564961c36428033f52e403f55c,
-    type: 3}
-  m_PrefabInstance: {fileID: 595715751}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &182593566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6375986169669536574, guid: dd56c01fc1e8c3b4581a3794e7be6003,
@@ -4423,11 +4422,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6707684329170145292, guid: b99cec564961c36428033f52e403f55c,
-        type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 179606381}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99cec564961c36428033f52e403f55c, type: 3}
 --- !u!114 &601412435 stripped
@@ -5850,11 +5844,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8235822230155499559, guid: 5d5cfb58be8fb4843a6c6f367f4306e4,
-        type: 3}
-      propertyPath: fireEffect
-      value: 
-      objectReference: {fileID: 1003775968}
     - target: {fileID: 8235822230155499563, guid: 5d5cfb58be8fb4843a6c6f367f4306e4,
         type: 3}
       propertyPath: m_Name
@@ -5879,12 +5868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!198 &1003775968 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1682517925423474574, guid: 5d5cfb58be8fb4843a6c6f367f4306e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 962554441}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1004636774
 GameObject:
   m_ObjectHideFlags: 0
