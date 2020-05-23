@@ -77,7 +77,7 @@ public class UIController : MonoBehaviour
         gameResultText.text = success ? "GameSuccess" : "GameOver";
     }
 
-    public void SetHealthBar(int MaxHP, int CurrHP)
+    public void SetHealthBar(int MaxHP, float CurrHP)
     {
         heathUI.maxValue = MaxHP;
         heathUI.value = CurrHP;

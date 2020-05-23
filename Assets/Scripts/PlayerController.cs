@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public float firstAttactDelay;
     
 
-    public int currHP;
+    public float currHP;
     private bool isDead;
     private float lastAttackTime = 0;
     private bool isWalking;
@@ -41,9 +41,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController = null;
     private float timer;
     private bool isfirstAttact = true;
-    public float mouseSensitivity = 10;
+    public float mouseSensitivity = 100;
 
-    public int CurrentHealth { get { return currHP; } }
+    public float CurrentHealth { get { return currHP; } }
     public int MaxHealth { get { return maxHP; } }
     public bool Dead { get { return isDead; } }
     public Vector3 CurrPostition { get { return transform.position; } }
@@ -65,6 +65,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (currHP == 0) Die();
+        if (gameObject.activeSelf == false)
+        {
+            currHP += 1 * Time.deltaTime;
+        }
         if (characterController.isGrounded == false)
         {
             characterController.Move(-Vector3.up * 1.0f * Time.deltaTime);
@@ -187,6 +191,7 @@ public class PlayerController : MonoBehaviour
                 newBullet.SetConDamage(conDamage);
                 newBullet.SetmovefieldOfFire(fieldOfFire);
                 newBullet.SetmoveSpeed(bulletSpeed);
+                newBullet.SetselfCollider(this.GetComponent<CharacterController>());
                 newBullet.tag = "PlayerBullet";
                 newBullet.Fire();
             }
@@ -199,6 +204,7 @@ public class PlayerController : MonoBehaviour
                 damagerControler.SetDamage(attackDamage);
                 damagerControler.SetisMagic(ismagic);
                 damagerControler.SetConDamage(conDamage);
+                damagerControler.SetselfCollider(this.GetComponent<CharacterController>());
                 newDamager.tag = "PlayerBullet";
             }
         }

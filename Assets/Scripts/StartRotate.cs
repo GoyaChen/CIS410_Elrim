@@ -7,6 +7,7 @@ public class StartRotate : MonoBehaviour
     public float x_angle;
     public float y_angle;
     public float z_angle;
+    public float rotate_speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,6 @@ public class StartRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Rotate(new Vector3(2.0f, 0.0f, 0.0f)); 
+        gameObject.transform.Rotate(new Vector3(rotate_speed, 0.0f, 0.0f)); 
     }
 }

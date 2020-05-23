@@ -15,7 +15,6 @@ public class BlockerController : MonoBehaviour
     [SerializeField]
     public int MaxHP;//最大HP
     public int Defense;//防御力
-    public float visibleDistance;//可以看到血条的距离
 
     private PlayerController player = null;
     private int CurHP;
@@ -38,9 +37,9 @@ public class BlockerController : MonoBehaviour
         if(player != null)
         {
             distance = (player.transform.position - transform.position).sqrMagnitude;
+            float visibleDistance = player.fieldOfFire * player.fieldOfFire + 14;
             if (distance < visibleDistance)
             {
-
                 heathBar.SetActive(true);
                 heathUI.value = CurHP;
                 heathBar.transform.LookAt(heathBar.transform.position + heathBar.transform.position - player.transform.position);
@@ -74,7 +73,7 @@ public class BlockerController : MonoBehaviour
             }
             else
             {
-                CurHP -= (value - Defense);
+                CurHP -= ((value - Defense) >= 0 ? (value - Defense) : 0);
             }
 
         }
@@ -83,5 +82,6 @@ public class BlockerController : MonoBehaviour
             CurHP = 0;
             isDead = true;
         }
+        print(CurHP);
     }
 }

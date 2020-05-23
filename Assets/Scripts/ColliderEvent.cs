@@ -6,13 +6,23 @@ using UnityEngine;
 public class ColliderEvent : MonoBehaviour
 {
     public bool playerInRange;
+    public GameObject target;
+    public EnemyController self;
 
+    private void Update()
+    {
+        if (self.chaosModel)
+        {
+            playerInRange = true;
+        }
+    }
     void OnTriggerStay(Collider obj)
     {
         if (obj.tag == "Player")
         {
             playerInRange = true;
         }
+        target = obj.gameObject;
     }
 
     private void OnTriggerExit(Collider obj)
@@ -21,6 +31,7 @@ public class ColliderEvent : MonoBehaviour
         {
             playerInRange = false;
         }
+        target = null;
     }
 
 }

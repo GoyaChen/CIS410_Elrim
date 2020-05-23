@@ -101,7 +101,6 @@ MonoBehaviour:
   heathBar: {fileID: 5603319482603818546}
   MaxHP: 1000
   Defense: 70
-  visibleDistance: 625
 --- !u!65 &8407888757109069324
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127,7 +126,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

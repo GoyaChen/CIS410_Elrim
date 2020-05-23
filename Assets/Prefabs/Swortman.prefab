@@ -519,7 +519,6 @@ GameObject:
   - component: {fileID: 8235822230148115019}
   - component: {fileID: 8235822230155499559}
   - component: {fileID: 8235822230155499558}
-  - component: {fileID: 8235822230155499557}
   - component: {fileID: 8235822230155499556}
   m_Layer: 0
   m_Name: Swortman
@@ -590,19 +589,19 @@ MonoBehaviour:
   deadEffect: {fileID: 0}
   deadAudio: {fileID: 0}
   maxHP: 3000
-  defense: 30
+  defense: 35
   moveSpeed: 1.5
   rotateSpeed: 1
   attackSpeed: 0.8
   attackDamage: 200
   explodeDamage: 0
   conDamage: 0
-  fieldOfFire: 20
-  bulletSpeed: 50
+  fieldOfFire: 0
+  bulletSpeed: 0
   ismagic: 0
   firstAttactDelay: 1.2
   currHP: 0
-  mouseSensitivity: 10
+  mouseSensitivity: 100
 --- !u!54 &8235822230155499558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -619,20 +618,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &8235822230155499557
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8235822230155499563}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!143 &8235822230155499556
 CharacterController:
   m_ObjectHideFlags: 0

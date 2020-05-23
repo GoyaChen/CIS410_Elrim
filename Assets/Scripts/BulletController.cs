@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public GameObject explodeDamager = null;//着弹
+    private Collider selfCollider;
     private int damage;
     private int explodDamage;
     private int conDamage;
@@ -14,6 +15,7 @@ public class BulletController : MonoBehaviour
     private bool isDamage;
     private bool isDamageMagic;
     private GameObject player = null;
+    public float rotate_speed = 0;
 
     public void SetDamage(int damage)
     {
@@ -45,6 +47,11 @@ public class BulletController : MonoBehaviour
         this.fieldOfFire = fieldOfFire;
     }
 
+    public void SetselfCollider(Collider selfCollider)
+    {
+        this.selfCollider = selfCollider;
+    }
+
     public void Fire()
     {
         existTime = fieldOfFire / moveSpeed;
@@ -66,13 +73,13 @@ public class BulletController : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
+        gameObject.transform.Rotate(new Vector3(rotate_speed, 0.0f, 0.0f));
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        print(tag);
-        if(tag == "EnemyBullet")
+        if(other != selfCollider)
         {
             if (other.tag == "Player")
             {
@@ -84,10 +91,6 @@ public class BulletController : MonoBehaviour
                 if (explodeDamager != null) Explode();
                 DestroyObj();
             }
-        }
-        
-        if(tag == "PlayerBullet")
-        {
             if (other.tag == "Enemy")
             {
                 if (isDamage)
@@ -97,7 +100,8 @@ public class BulletController : MonoBehaviour
                 }
                 if (explodeDamager != null) Explode();
                 DestroyObj();
-            }else if(other.tag == "Blocker")
+            }
+            else if (other.tag == "Blocker")
             {
                 if (isDamage)
                 {
@@ -108,7 +112,8 @@ public class BulletController : MonoBehaviour
                 DestroyObj();
             }
         }
-        if(!isDamageMagic)
+
+        if (!isDamageMagic)
         {
             if (other.tag == "Wall" || other.tag == "Ground")
             {
@@ -127,6 +132,7 @@ public class BulletController : MonoBehaviour
         newDamageController.SetDamage(explodDamage);
         newDamageController.SetisMagic(isDamageMagic);
         newDamageController.SetConDamage(conDamage);
+        newDamageController.SetselfCollider(selfCollider);
     }
 
     private void DestroyObj()

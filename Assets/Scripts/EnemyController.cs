@@ -30,10 +30,13 @@ public class EnemyController : MonoBehaviour
     public int conDamage = 0;//持续伤害
     public float fieldOfFire;//射程
     public float moveSpeed;//子弹速度
+    public float rotateSpeed;//旋转速度
     public bool ismagic;//是否是魔法攻击
-    public float visibleDistance;//可以看到血条的距离
+    public bool isStraight;//是否是直射攻击
+    public bool chaosModel;//混战模式
 
     private PlayerController player = null;
+    private GameObject target = null;
     private bool playerInRange;
     private int CurHP;
     private float lastAttackTime = 0;
@@ -42,6 +45,11 @@ public class EnemyController : MonoBehaviour
     private bool isfireAudioOn;
     private bool isDeadAudioOn;
     private float distance;
+    private float startAngle;
+    private Quaternion originalRotation;
+    private bool isOriginal;
+
+    public bool Dead { get { return isDead; } }
 
     void Awake()
     {
@@ -51,6 +59,7 @@ public class EnemyController : MonoBehaviour
         isDeadAudioOn = false;
         if (deadEffect != null) deadEffect.Stop();
         heathBar.SetActive(false);
+        isOriginal = true;
     }
 
     void Update()
@@ -61,7 +70,30 @@ public class EnemyController : MonoBehaviour
             playerInRange = attackRangeDetector.playerInRange;
             if (playerInRange && !isDead && !player.Dead)
             {
-                Rotator.LookAt(Rotator.transform.position + Rotator.position - player.transform.position);
+                if (isOriginal)
+                {
+                    originalRotation = Rotator.transform.rotation;
+                    isOriginal = false;
+                } 
+                target = attackRangeDetector.target;
+                if (chaosModel)
+                {
+                    if(target != this.gameObject)
+                    {
+                        //Rotator.LookAt(Rotator.transform.position + Rotator.position - target.transform.position);
+                        Rotator.rotation = Quaternion.Slerp(Rotator.rotation, 
+                            Quaternion.LookRotation((target.transform.position - Rotator.position).normalized),
+                            rotateSpeed * Time.deltaTime);
+                    }
+                    
+                }
+                else
+                {
+                    //Rotator.LookAt(Rotator.transform.position + Rotator.position - player.transform.position);
+                    Rotator.rotation = Quaternion.Slerp(Rotator.rotation,
+                        Quaternion.LookRotation((player.transform.position - Rotator.position).normalized),
+                        rotateSpeed * Time.deltaTime);
+                }
                 if (Time.time - lastAttackTime >= attackSpeed)
                 {
                     lastAttackTime = Time.time;
@@ -86,10 +118,17 @@ public class EnemyController : MonoBehaviour
                     if (continueFireAudio != null) continueFireAudio.Stop();
                     isfireAudioOn = false;
                 }
-
+                if (!isOriginal)
+                {
+                    Rotator.transform.rotation = originalRotation;
+                    //Rotator.rotation = Quaternion.Slerp(Rotator.rotation, originalRotation, rotateSpeed * Time.deltaTime);
+                    isOriginal = true;
+                }
             }
 
             distance = (player.transform.position - transform.position).sqrMagnitude;
+            startAngle = -45 * distance / (fieldOfFire * fieldOfFire);
+            float visibleDistance = player.fieldOfFire * player.fieldOfFire + 14;
             if (distance < visibleDistance)
             {
 
@@ -127,7 +166,9 @@ public class EnemyController : MonoBehaviour
         newBullet.SetConDamage(conDamage);
         newBullet.SetmovefieldOfFire(fieldOfFire);
         newBullet.SetmoveSpeed(moveSpeed);
+        newBullet.SetselfCollider(this.GetComponent<Collider>());
         newBullet.tag = "EnemyBullet";
+        if (!isStraight) newBullet.transform.Rotate(startAngle, 0, 0, Space.Self);
         newBullet.Fire();
     }
 
