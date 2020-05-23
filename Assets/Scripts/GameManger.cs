@@ -17,7 +17,6 @@ public class GameManger : MonoBehaviour
     }
 
     public int requiretarget;//要求的目标数
-    public bool chaosModel;
     [SerializeField] private GameObject targetObjectsParent = null; //所有的目标物体的父对象
     [SerializeField] private float GameTimeLimit = 360; //游戏限制时间 单位s
     [Header("所有的角色，按照1-4的顺序拖入")]
