@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2386940678895141157
 Transform:
   m_ObjectHideFlags: 0
@@ -5610,11 +5610,11 @@ MonoBehaviour:
   explodeDamage: 600
   conDamage: 0
   fieldOfFire: 60
-  moveSpeed: 33
+  moveSpeed: 30
   rotateSpeed: 3
   ismagic: 0
   isStraight: 0
-  chaosModel: 1
+  chaosModel: 0
 --- !u!65 &7616083902492349075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5701,7 +5701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7616083902880984459
 Transform:
   m_ObjectHideFlags: 0
@@ -5745,7 +5745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeDamager: {fileID: 3169553884338977933}
-  rotate_speed: 0.6
+  rotate_speed: 1
 --- !u!33 &2984561671734740667
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6103,7 +6103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7616083903330884436
 Transform:
   m_ObjectHideFlags: 0
