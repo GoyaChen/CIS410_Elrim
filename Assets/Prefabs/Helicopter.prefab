@@ -17112,7 +17112,7 @@ MonoBehaviour:
   rotateSpeed: 6
   ismagic: 0
   isStraight: 1
-  chaosModel: 1
+  chaosModel: 0
 --- !u!136 &7887489631546269657
 CapsuleCollider:
   m_ObjectHideFlags: 0

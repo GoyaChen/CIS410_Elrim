@@ -16497,7 +16497,7 @@ MonoBehaviour:
   rotateSpeed: 7
   ismagic: 0
   isStraight: 1
-  chaosModel: 1
+  chaosModel: 0
 --- !u!65 &7404503711462744120
 BoxCollider:
   m_ObjectHideFlags: 0
