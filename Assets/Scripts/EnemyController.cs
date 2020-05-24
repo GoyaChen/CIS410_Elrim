@@ -48,7 +48,6 @@ public class EnemyController : MonoBehaviour
     private float startAngle;
     private Quaternion originalRotation;
     private bool isOriginal;
-    private float timer;
 
     public bool Dead { get { return isDead; } }
 
@@ -150,8 +149,7 @@ public class EnemyController : MonoBehaviour
                     if (deadAudio != null) deadAudio.Play();
                     isDeadAudioOn = true;
                 }
-                timer += Time.deltaTime;
-                if (timer > 3.0f) gameObject.SetActive(false);
+                Destroy(gameObject, 1.5f);
             }
         }
         
