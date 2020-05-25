@@ -5472,7 +5472,7 @@ MonoBehaviour:
   heathUI: {fileID: 6281960789559931845}
   heathBar: {fileID: 6281960790936267724}
   MaxHP: 300
-  Defense: 10
+  Defense: 12
   attackSpeed: 1
   attackDamage: 10
   explodeDamage: 300

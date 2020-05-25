@@ -5603,8 +5603,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7616083902880984458}
   heathUI: {fileID: 7616083902180405641}
   heathBar: {fileID: 7616083903087798656}
-  MaxHP: 500
-  Defense: 10
+  MaxHP: 300
+  Defense: 12
   attackSpeed: 2.5
   attackDamage: 10
   explodeDamage: 600

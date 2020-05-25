@@ -48974,8 +48974,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8947869138545397048}
   heathUI: {fileID: 8322432480158152131}
   heathBar: {fileID: 8322432480861302218}
-  MaxHP: 300
-  Defense: 10
+  MaxHP: 400
+  Defense: 14
   attackSpeed: 1
   attackDamage: 10
   explodeDamage: 300
@@ -48997,8 +48997,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.8, z: 2}
-  m_Center: {x: 0, y: 0.7, z: 0}
+  m_Size: {x: 3, y: 3.5, z: 3}
+  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!54 &7463701040860106454
 Rigidbody:
   m_ObjectHideFlags: 0

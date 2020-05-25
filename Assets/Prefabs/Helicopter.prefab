@@ -1240,7 +1240,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2532858901198335523}
-  - component: {fileID: 5059010816258500937}
   m_Layer: 0
   m_Name: Shooter model
   m_TagString: Untagged
@@ -1263,20 +1262,6 @@ Transform:
   m_Father: {fileID: 3277581335813272994}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -40, y: 0, z: 0}
---- !u!136 &5059010816258500937
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116517767587921354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 2
-  m_Height: 12
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -2}
 --- !u!1 &1171061499319639857
 GameObject:
   m_ObjectHideFlags: 0

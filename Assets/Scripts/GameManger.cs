@@ -22,12 +22,16 @@ public class GameManger : MonoBehaviour
     [Header("所有的角色，按照1-4的顺序拖入")]
     [SerializeField] private List<PlayerController> allPlayers = null; //所有的角色
     [SerializeField] private Transform birthPoint = null; //出生位置
+    [SerializeField] private GameObject transformEffect = null;//传送效果
+    [SerializeField] private AudioSource transformAudioStart = null; //传送音效
+    [SerializeField] private AudioSource transformAudioStop = null; //传送音效
 
     private int getTargetNum = 0; //获得的目标个数
     private float remainGameTime = 360; //剩余游戏时间
     private GameObject[] allTargetObjects = null; //所有的目标物体
     private PlayerController usingPlayer = null; //正在使用的玩家
     private GameObject tempCamera = null; //临时摄像机，当玩家射线机隐藏时代替显示
+    private bool willUpdate;
     /// <summary>
     /// 剩余游戏时间
     /// </summary>
@@ -52,6 +56,9 @@ public class GameManger : MonoBehaviour
         }
         tempCamera = transform.Find("Camera").gameObject;
         tempCamera.SetActive(false);
+        transformAudioStart.Stop();
+        transformAudioStop.Stop();
+        willUpdate = true;
     }
 
 
@@ -66,7 +73,9 @@ public class GameManger : MonoBehaviour
 
     private void Update()
     {
-        GameTimeUpdate(); 
+        if (willUpdate){
+            GameTimeUpdate();
+        }
         UpdateCheckTargetObjects();
         SwitchPlayerCharacter();
 
@@ -78,18 +87,20 @@ public class GameManger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            transformEffect.SetActive(true);
+            transformEffect.transform.position = usingPlayer.transform.position + new Vector3(0,3,0);
+            transformAudioStart.Play();
+            transformAudioStart.Play(1);
             if (UIController.Instance.GetSelectCharacterUIActive())
             {
                 OnCloseSelectCharacterUI();
             }
             else
             {
-                Time.timeScale = 0;
+                willUpdate = false;
                 usingPlayer.gameObject.SetActive(false);
-                Transform camTrans = usingPlayer.GetComponentInChildren<Camera>().transform;
-                tempCamera.transform.position = camTrans.position;
-                tempCamera.transform.rotation = camTrans.rotation;
                 tempCamera.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
                 UIController.Instance.SetSelectCharacterUI(true);
             }
           
@@ -117,10 +128,13 @@ public class GameManger : MonoBehaviour
     //当关闭选择角色UI
     private void OnCloseSelectCharacterUI()
     {
-        Time.timeScale = 1;
+        willUpdate = true;
         UIController.Instance.SetSelectCharacterUI(false);
         tempCamera.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         usingPlayer.gameObject.SetActive(true);
+        transformEffect.SetActive(false);
+        transformAudioStop.Play();
     }
 
 
@@ -153,6 +167,7 @@ public class GameManger : MonoBehaviour
         }
         UIController.Instance.UpdateGameTime(Mathf.RoundToInt(remainGameTime)); //更新剩余游戏时间显示
     }
+
 
 
 }
