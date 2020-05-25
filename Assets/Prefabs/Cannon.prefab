@@ -171,7 +171,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 35375cfcd855bdf4391b651ffa5ebf1b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.6
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -488,7 +488,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5609,9 +5609,10 @@ MonoBehaviour:
   attackDamage: 10
   explodeDamage: 600
   conDamage: 0
-  fieldOfFire: 60
-  moveSpeed: 30
-  rotateSpeed: 3
+  fieldOfFire: 45
+  moveSpeed: 35
+  rotateSpeed: 0.2
+  rotateAngle: 30
   ismagic: 0
   isStraight: 0
   chaosModel: 0
@@ -5745,7 +5746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeDamager: {fileID: 3169553884338977933}
-  rotate_speed: 1
+  rotate_speed: 0.9
 --- !u!33 &2984561671734740667
 MeshFilter:
   m_ObjectHideFlags: 0

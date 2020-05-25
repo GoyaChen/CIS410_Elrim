@@ -11227,7 +11227,8 @@ MonoBehaviour:
   conDamage: 0
   fieldOfFire: 8
   moveSpeed: 100
-  rotateSpeed: 7
+  rotateSpeed: 0.5
+  rotateAngle: 90
   ismagic: 0
   isStraight: 1
   chaosModel: 0
@@ -21732,6 +21733,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5551497425587611860}
     m_Modifications:
+    - target: {fileID: 7112076092696870529, guid: 8b44e2cb4cb2e654798d22e18a3d84ea,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7112076092710660075, guid: 8b44e2cb4cb2e654798d22e18a3d84ea,
         type: 3}
       propertyPath: m_Name

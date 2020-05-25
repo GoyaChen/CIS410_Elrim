@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     public float fieldOfFire;//射程
     public float moveSpeed;//子弹速度
     public float rotateSpeed;//旋转速度
+    public float rotateAngle;//旋转角度
     public bool ismagic;//是否是魔法攻击
     public bool isStraight;//是否是直射攻击
     public bool chaosModel;//混战模式
@@ -49,6 +50,8 @@ public class EnemyController : MonoBehaviour
     private Quaternion originalRotation;
     private bool isOriginal;
     private float timer;
+    private float Angle = 0;
+    private int rotatedir = 1;
 
     public bool Dead { get { return isDead; } }
 
@@ -81,19 +84,19 @@ public class EnemyController : MonoBehaviour
                 {
                     if(target != this.gameObject)
                     {
-                        //Rotator.LookAt(Rotator.transform.position + Rotator.position - target.transform.position);
-                        Rotator.rotation = Quaternion.Slerp(Rotator.rotation, 
-                            Quaternion.LookRotation((target.transform.position - Rotator.position).normalized),
-                            rotateSpeed * Time.deltaTime);
+                        Rotator.LookAt(target.transform.position);
+                        //Rotator.rotation = Quaternion.Slerp(Rotator.rotation, 
+                           // Quaternion.LookRotation((target.transform.position - Rotator.position).normalized),
+                           // rotateSpeed * Time.deltaTime);
                     }
                     
                 }
                 else
                 {
-                    //Rotator.LookAt(Rotator.transform.position + Rotator.position - player.transform.position);
-                    Rotator.rotation = Quaternion.Slerp(Rotator.rotation,
-                        Quaternion.LookRotation((player.transform.position - Rotator.position).normalized),
-                        rotateSpeed * Time.deltaTime);
+                    Rotator.LookAt(player.transform.position);
+                    //Rotator.rotation = Quaternion.Slerp(Rotator.rotation,
+                        //Quaternion.LookRotation((player.transform.position - Rotator.position).normalized),
+                        //rotateSpeed * Time.deltaTime);
                 }
                 if (Time.time - lastAttackTime >= attackSpeed)
                 {
@@ -151,10 +154,23 @@ public class EnemyController : MonoBehaviour
                     isDeadAudioOn = true;
                 }
                 timer += Time.deltaTime;
-                if (timer > 3.0f) gameObject.SetActive(false);
+                if (timer > 1.0f) gameObject.SetActive(false);
+            }
+
+            if (GetCanRotate())
+            {
+                if(Angle >= rotateAngle)
+                {
+                    rotatedir = -1;
+                }
+                if (Angle <= -rotateAngle)
+                {
+                    rotatedir = 1;
+                }
+                Rotator.transform.Rotate(new Vector3(0.0f, rotatedir * rotateSpeed, 0.0f));
+                Angle += (rotateSpeed * rotatedir);
             }
         }
-        
     }
 
     private void Attack()

@@ -16494,7 +16494,8 @@ MonoBehaviour:
   conDamage: 0
   fieldOfFire: 8
   moveSpeed: 100
-  rotateSpeed: 7
+  rotateSpeed: 0
+  rotateAngle: 0
   ismagic: 0
   isStraight: 1
   chaosModel: 0
