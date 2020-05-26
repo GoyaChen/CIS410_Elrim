@@ -15,7 +15,7 @@ public class WaypointPatrol : MonoBehaviour
         navMeshAgent.SetDestination(waypoints[0].position);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
         {

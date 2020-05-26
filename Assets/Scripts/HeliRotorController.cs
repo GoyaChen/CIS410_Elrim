@@ -22,7 +22,7 @@ public class HeliRotorController : MonoBehaviour
         OriginalRotate = transform.localEulerAngles;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         rotateDegree += rotarSpeed * Time.deltaTime;
         rotateDegree = rotateDegree % 360;

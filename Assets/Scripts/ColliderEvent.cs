@@ -9,7 +9,7 @@ public class ColliderEvent : MonoBehaviour
     public GameObject target;
     public EnemyController self;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (self.chaosModel)
         {

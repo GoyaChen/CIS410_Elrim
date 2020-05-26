@@ -7,7 +7,7 @@ public class Rotater : MonoBehaviour
     public float rotateSpeed;
     public EnemyController enemy;
 
-    void Update()
+    void FixedUpdate()
     {
         if (enemy.GetCanRotate())
         {

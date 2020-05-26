@@ -31,7 +31,7 @@ public class BlockerController : MonoBehaviour
         heathBar.SetActive(false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         if(player != null)

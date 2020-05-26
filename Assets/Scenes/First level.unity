@@ -2358,6 +2358,16 @@ PrefabInstance:
       propertyPath: requiretarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: GameTimeLimit
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: senceID
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5121666592455050727, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_Name

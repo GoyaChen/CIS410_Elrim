@@ -24,7 +24,9 @@ public class GameManger : MonoBehaviour
     [SerializeField] private Transform birthPoint = null; //出生位置
     [SerializeField] private GameObject transformEffect = null;//传送效果
     [SerializeField] private AudioSource transformAudioStart = null; //传送音效
-    [SerializeField] private AudioSource transformAudioStop = null; //传送音效
+    [SerializeField] private int senceID;
+    [SerializeField] private AudioSource SuccessAudio = null; //成功音效
+    [SerializeField] private AudioSource failAudio = null; //失败音效
 
     private int getTargetNum = 0; //获得的目标个数
     private float remainGameTime = 360; //剩余游戏时间
@@ -32,6 +34,8 @@ public class GameManger : MonoBehaviour
     private PlayerController usingPlayer = null; //正在使用的玩家
     private GameObject tempCamera = null; //临时摄像机，当玩家射线机隐藏时代替显示
     private bool willUpdate;
+    private float timer;
+    private float lastime;
     /// <summary>
     /// 剩余游戏时间
     /// </summary>
@@ -57,8 +61,8 @@ public class GameManger : MonoBehaviour
         tempCamera = transform.Find("Camera").gameObject;
         tempCamera.SetActive(false);
         transformAudioStart.Stop();
-        transformAudioStop.Stop();
         willUpdate = true;
+        lastime = 0;
     }
 
 
@@ -78,7 +82,6 @@ public class GameManger : MonoBehaviour
         }
         UpdateCheckTargetObjects();
         SwitchPlayerCharacter();
-
         UIController.Instance.SetHealthBar(usingPlayer.MaxHealth, usingPlayer.CurrentHealth);
     }
 
@@ -90,7 +93,6 @@ public class GameManger : MonoBehaviour
             transformEffect.SetActive(true);
             transformEffect.transform.position = usingPlayer.transform.position + new Vector3(0,3,0);
             transformAudioStart.Play();
-            transformAudioStart.Play(1);
             if (UIController.Instance.GetSelectCharacterUIActive())
             {
                 OnCloseSelectCharacterUI();
@@ -123,6 +125,18 @@ public class GameManger : MonoBehaviour
         usingPlayer.gameObject.SetActive(false);
         usingPlayer = allPlayers[index];
         usingPlayer.gameObject.SetActive(true);
+        if((Time.time - lastime) > 10)
+        {
+            if ((usingPlayer.currHP + (Time.time - lastime) * 10) < usingPlayer.MaxHealth)
+            {
+                usingPlayer.currHP += (Time.time - lastime) * 10;
+            }
+            else
+            {
+                usingPlayer.currHP = usingPlayer.MaxHealth;
+            }
+        }
+        lastime = Time.time;
     }
 
     //当关闭选择角色UI
@@ -134,7 +148,6 @@ public class GameManger : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         usingPlayer.gameObject.SetActive(true);
         transformEffect.SetActive(false);
-        transformAudioStop.Play();
     }
 
 
@@ -151,6 +164,14 @@ public class GameManger : MonoBehaviour
         if(getTargetNum >= requiretarget)
         {
             UIController.Instance.ShowGameOver(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            if (SuccessAudio != null) SuccessAudio.Play();
+            timer += Time.deltaTime;
+            if(timer > 5.0f)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(senceID);
+            }
         }
     }
 
@@ -162,8 +183,16 @@ public class GameManger : MonoBehaviour
         if (remainGameTime <= 0)
         {
             remainGameTime = 0;
-            Time.timeScale = 0;
             UIController.Instance.ShowGameOver(false);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            if (failAudio != null) failAudio.Play();
+            timer += Time.deltaTime;
+            if (timer > 5.0f)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            }
+
         }
         UIController.Instance.UpdateGameTime(Mathf.RoundToInt(remainGameTime)); //更新剩余游戏时间显示
     }

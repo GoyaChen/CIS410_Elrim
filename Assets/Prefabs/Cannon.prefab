@@ -5527,7 +5527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   target: {fileID: 0}
-  self: {fileID: 0}
+  self: {fileID: 7616083902492404509}
 --- !u!65 &407660193238928500
 BoxCollider:
   m_ObjectHideFlags: 0

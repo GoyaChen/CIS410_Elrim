@@ -57,14 +57,20 @@ public class PlayerController : MonoBehaviour
         currHP = maxHP;
         isDead = false;
         bulletPointRotate();
-        Cursor.visible = false;
         fireEffect.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (currHP == 0) Die();
+        if (currHP == 0)
+        {
+            Die();
+        }
+        else
+        {
+            isDead = false;
+        }
         if (gameObject.activeSelf == false)
         {
             currHP += 1 * Time.deltaTime;

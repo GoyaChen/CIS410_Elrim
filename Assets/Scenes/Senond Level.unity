@@ -3289,6 +3289,11 @@ PrefabInstance:
       propertyPath: chaosModel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: senceID
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5121666592455050727, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_Name
@@ -3298,6 +3303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143510409523943706, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888501157717573492, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
@@ -3754,7 +3764,7 @@ PrefabInstance:
     - target: {fileID: 7616083902880984452, guid: 44f3bc8770107b146b3a332d1deff286,
         type: 3}
       propertyPath: rotate_speed
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7616083903148163219, guid: 44f3bc8770107b146b3a332d1deff286,
         type: 3}
@@ -4650,35 +4660,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1231844442}
     m_Modifications:
-    - target: {fileID: 460186990574681380, guid: 4157382768bd4a94388625ae0196b508,
+    - target: {fileID: 1534618735434936420, guid: 4157382768bd4a94388625ae0196b508,
         type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
-      objectReference: {fileID: 467269280}
-    - target: {fileID: 460186990574681380, guid: 4157382768bd4a94388625ae0196b508,
-        type: 3}
-      propertyPath: waypoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 1096936508}
-    - target: {fileID: 460186990574681380, guid: 4157382768bd4a94388625ae0196b508,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1534618735434936420, guid: 4157382768bd4a94388625ae0196b508,
         type: 3}
-      propertyPath: waypoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 467269280}
-    - target: {fileID: 1534618735434936420, guid: 4157382768bd4a94388625ae0196b508,
-        type: 3}
       propertyPath: waypoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1096936508}
+      objectReference: {fileID: 0}
     - target: {fileID: 1534618735434936420, guid: 4157382768bd4a94388625ae0196b508,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2889094139027721089, guid: 4157382768bd4a94388625ae0196b508,
         type: 3}
@@ -4769,11 +4764,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395583634478160269, guid: 4157382768bd4a94388625ae0196b508,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5059010816258500937, guid: 4157382768bd4a94388625ae0196b508, type: 3}
@@ -13099,6 +13089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Warlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951277865432356744, guid: c4204fbc6d0bff04ebbea71cfec27be9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5951277865432356745, guid: c4204fbc6d0bff04ebbea71cfec27be9,
         type: 3}

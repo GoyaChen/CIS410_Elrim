@@ -757,6 +757,11 @@ PrefabInstance:
       propertyPath: targetObjectsParent
       value: 
       objectReference: {fileID: 1935830623}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: senceID
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5121666592455050727, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_Name

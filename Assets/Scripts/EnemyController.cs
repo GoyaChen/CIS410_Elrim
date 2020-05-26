@@ -55,6 +55,11 @@ public class EnemyController : MonoBehaviour
 
     public bool Dead { get { return isDead; } }
 
+    public bool GetCanRotate()
+    {
+        return !playerInRange && !isDead && !player.Dead;
+    }
+
     void Awake()
     {
         CurHP = MaxHP;
@@ -210,10 +215,5 @@ public class EnemyController : MonoBehaviour
             CurHP = 0;
             isDead = true;
         }
-    }
-
-    public bool GetCanRotate()
-    {
-        return !playerInRange && !isDead && !player.Dead;
     }
 }

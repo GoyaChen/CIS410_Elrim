@@ -15,7 +15,7 @@ public class StartRotate : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         gameObject.transform.Rotate(new Vector3(rotate_speed, 0.0f, 0.0f)); 
     }
