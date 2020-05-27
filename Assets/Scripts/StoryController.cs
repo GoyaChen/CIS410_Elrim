@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class StoryController : MonoBehaviour
 {
+    [SerializeField] private GameObject meanu;
+    [SerializeField] private Button topicButton;
+    [SerializeField] private Button gameButton;
     public GameObject[] slides;
     public Button Last;
     public Button Next;
@@ -15,8 +18,10 @@ public class StoryController : MonoBehaviour
 
     private void Start()
     {
-
-       StartGame.onClick.AddListener(runStart);
+        meanu.SetActive(false);
+        topicButton.onClick.AddListener(returnTopic);
+        gameButton.onClick.AddListener(returnGame);
+        StartGame.onClick.AddListener(runStart);
         Last.onClick.AddListener(GoLast);
         Next.onClick.AddListener(GoNext);
         StartGame.gameObject.SetActive(false);
@@ -28,6 +33,10 @@ public class StoryController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            meanu.SetActive(true);
+        }
     }
 
     void runStart()
@@ -51,5 +60,15 @@ public class StoryController : MonoBehaviour
             count++;
         }
         slides[count].SetActive(true);
+    }
+
+    private void returnTopic()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    private void returnGame()
+    {
+        meanu.SetActive(false);
     }
 }

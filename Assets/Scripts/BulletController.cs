@@ -70,7 +70,7 @@ public class BulletController : MonoBehaviour
         isDamage = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
         gameObject.transform.Rotate(new Vector3(rotate_speed, 0.0f, 0.0f));

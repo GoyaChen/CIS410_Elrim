@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
 
     public bool GetCanRotate()
     {
-        return !playerInRange && !isDead && !player.Dead;
+        return !playerInRange && !isDead;
     }
 
     void Awake()
@@ -87,14 +87,16 @@ public class EnemyController : MonoBehaviour
                 target = attackRangeDetector.target;
                 if (chaosModel)
                 {
-                    if(target != this.gameObject)
+                    if(target != null)
                     {
-                        Rotator.LookAt(target.transform.position);
-                        //Rotator.rotation = Quaternion.Slerp(Rotator.rotation, 
-                           // Quaternion.LookRotation((target.transform.position - Rotator.position).normalized),
-                           // rotateSpeed * Time.deltaTime);
-                    }
-                    
+                        if (target != this.gameObject)
+                        {
+                            Rotator.LookAt(target.transform.position);
+                            //Rotator.rotation = Quaternion.Slerp(Rotator.rotation, 
+                            // Quaternion.LookRotation((target.transform.position - Rotator.position).normalized),
+                            // rotateSpeed * Time.deltaTime);
+                        }
+                    } 
                 }
                 else
                 {

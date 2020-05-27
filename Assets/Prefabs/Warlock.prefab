@@ -25895,7 +25895,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 50
@@ -26157,7 +26157,7 @@ Transform:
   m_GameObject: {fileID: 5951277865432356744}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 12.7847, y: 0.55859375, z: 30.17914}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 5951277864559914656}
   - {fileID: 5951277863588278235}

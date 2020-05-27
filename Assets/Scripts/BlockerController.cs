@@ -31,7 +31,7 @@ public class BlockerController : MonoBehaviour
         heathBar.SetActive(false);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         if(player != null)
@@ -82,6 +82,5 @@ public class BlockerController : MonoBehaviour
             CurHP = 0;
             isDead = true;
         }
-        print(CurHP);
     }
 }

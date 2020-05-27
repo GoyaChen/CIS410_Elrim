@@ -9,20 +9,22 @@ public class ColliderEvent : MonoBehaviour
     public GameObject target;
     public EnemyController self;
 
-    private void FixedUpdate()
-    {
-        if (self.chaosModel)
-        {
-            playerInRange = true;
-        }
-    }
-    void OnTriggerStay(Collider obj)
+    void OnTriggerEnter(Collider obj)
     {
         if (obj.tag == "Player")
         {
             playerInRange = true;
         }
-        target = obj.gameObject;
+
+        if (self.chaosModel)
+        {
+            if (obj.tag == "Player" || obj.tag == "Enemy" || obj.tag == "Blocker")
+            {
+                playerInRange = true;
+                target = obj.gameObject;
+            }
+        }
+
     }
 
     private void OnTriggerExit(Collider obj)

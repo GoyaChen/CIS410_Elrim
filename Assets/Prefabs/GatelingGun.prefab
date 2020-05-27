@@ -11169,6 +11169,7 @@ GameObject:
   - component: {fileID: 5551497425587493625}
   - component: {fileID: 5551497425587446647}
   - component: {fileID: 551867525933645924}
+  - component: {fileID: 8121488828498335727}
   m_Layer: 0
   m_Name: GatelingGun
   m_TagString: Enemy
@@ -11261,6 +11262,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &8121488828498335727
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5551497425587446646}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.065, y: 1.085, z: 0.985}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.51, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5551497425812357231
 GameObject:
   m_ObjectHideFlags: 0

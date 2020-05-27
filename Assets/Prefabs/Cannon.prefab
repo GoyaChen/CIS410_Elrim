@@ -171,7 +171,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 35375cfcd855bdf4391b651ffa5ebf1b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.6
+  m_Pitch: 0.5
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -327,7 +327,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 51a1443e231e7e945a968a142942419a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -335,7 +335,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -5553,6 +5553,7 @@ GameObject:
   - component: {fileID: 7616083902492404509}
   - component: {fileID: 7616083902492349075}
   - component: {fileID: 726541301788621789}
+  - component: {fileID: 8017401352646262534}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Enemy
@@ -5645,6 +5646,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &8017401352646262534
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7616083902492349074}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.46, y: 1.15, z: 2.55}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7616083902492558858
 GameObject:
   m_ObjectHideFlags: 0
