@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class StoryController : MonoBehaviour
 {
-    [SerializeField] private GameObject meanu;
-    [SerializeField] private Button topicButton;
-    [SerializeField] private Button gameButton;
+    [SerializeField] private GameObject meanu = null;
+    [SerializeField] private Button topicButton = null;
+    [SerializeField] private Button gameButton = null;
     public GameObject[] slides;
-    public Button Last;
-    public Button Next;
-    public Button StartGame;
+    public Button Last = null;
+    public Button Next = null;
+    public Button StartGame = null;
     public int senceID;
 
     private int count;

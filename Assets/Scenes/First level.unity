@@ -680,7 +680,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ce5d24bf2981184795a887bae02e666, type: 2}
+  - {fileID: 2100000, guid: 3fa6411b52a9b3c41af08015cdfb491c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2987,7 +2987,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ce5d24bf2981184795a887bae02e666, type: 2}
+  - {fileID: 2100000, guid: 3fa6411b52a9b3c41af08015cdfb491c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3319,7 +3319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ce5d24bf2981184795a887bae02e666, type: 2}
+  - {fileID: 2100000, guid: 3fa6411b52a9b3c41af08015cdfb491c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4476,7 +4476,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ce5d24bf2981184795a887bae02e666, type: 2}
+  - {fileID: 2100000, guid: 3fa6411b52a9b3c41af08015cdfb491c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5658,7 +5658,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 88d51ca5b2ba3414ba1da705e884640f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6727,6 +6727,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: menu
       objectReference: {fileID: 0}
+    - target: {fileID: 2207528439265072737, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207528439265072737, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207528439265072737, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511728506127404857, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511728506127404857, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511728506127404857, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5121666591206550473, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -6907,6 +6937,11 @@ PrefabInstance:
       propertyPath: GameTimeLimit
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: BGM
+      value: 
+      objectReference: {fileID: 1630380390}
     - target: {fileID: 5121666592455050727, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_Name

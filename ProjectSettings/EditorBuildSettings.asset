@@ -33,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Story4.unity
     guid: 8cac0548b1c56f447a9c1094c1b3d4be
   - enabled: 1
-    path: Assets/Scenes/How to Play.unity
-    guid: f538a017710d11744897e9c91378c408
+    path: Assets/Scenes/HowtoPlay.unity
+    guid: 02db9d793877f9e4085447fad4f77001
   m_configObjects: {}

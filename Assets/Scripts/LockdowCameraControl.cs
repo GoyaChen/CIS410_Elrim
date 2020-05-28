@@ -22,7 +22,6 @@ public class LockdowCameraControl : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             transform.position += new Vector3(0, zoomSpeed, 0);
-            print("zoom");
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {

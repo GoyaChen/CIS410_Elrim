@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class GameManger : MonoBehaviour
 {
@@ -25,13 +26,14 @@ public class GameManger : MonoBehaviour
     [SerializeField] private Transform birthPoint = null; //出生位置
     [SerializeField] private GameObject transformEffect = null;//传送效果
     [SerializeField] private AudioSource transformAudioStart = null; //传送音效
-    [SerializeField] private int senceID;
+    [SerializeField] private int senceID = 0;
     [SerializeField] private AudioSource SuccessAudio = null; //成功音效
     [SerializeField] private AudioSource failAudio = null; //失败音效
+    [SerializeField] private AudioSource BGM = null; 
     [SerializeField] private Slider recoverBar = null; //回血条
-    [SerializeField] private GameObject meanu;
-    [SerializeField] private Button topicButton;
-    [SerializeField] private Button gameButton;
+    [SerializeField] private GameObject meanu = null;
+    [SerializeField] private Button topicButton = null;
+    [SerializeField] private Button gameButton = null;
 
     private int getTargetNum = 0; //获得的目标个数
     private float remainGameTime = 360; //剩余游戏时间
@@ -52,6 +54,7 @@ public class GameManger : MonoBehaviour
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         //菜单初始化
         meanu.SetActive(false);
         topicButton.onClick.AddListener(returnTopic);
@@ -94,7 +97,8 @@ public class GameManger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             meanu.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Time.timeScale = 0;
         }
 
@@ -120,6 +124,7 @@ public class GameManger : MonoBehaviour
                 usingPlayer.gameObject.SetActive(false);
                 tempCamera.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
                 UIController.Instance.SetSelectCharacterUI(true);
             }
 
@@ -161,6 +166,7 @@ public class GameManger : MonoBehaviour
         UIController.Instance.SetSelectCharacterUI(false);
         tempCamera.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         usingPlayer.gameObject.SetActive(true);
         transformEffect.SetActive(false);
     }
@@ -178,10 +184,11 @@ public class GameManger : MonoBehaviour
         UIController.Instance.ShowTargetNum(getTargetNum);
         if(getTargetNum >= requiretarget)
         {
-            UIController.Instance.ShowGameOver(true);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            SuccessAudio.Play();
+            BGM.Stop();
+            if (!SuccessAudio.isPlaying) SuccessAudio.Play();
+            UIController.Instance.ShowGameOver(true);
             timer += Time.deltaTime;
             if(timer > 5.0f)
             {
@@ -198,10 +205,11 @@ public class GameManger : MonoBehaviour
         if (remainGameTime <= 0)
         {
             remainGameTime = 0;
-            UIController.Instance.ShowGameOver(false);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            failAudio.Play();
+            BGM.Stop();
+            if (!failAudio.isPlaying) failAudio.Play();
+            UIController.Instance.ShowGameOver(false);
             timer += Time.deltaTime;
             if (timer > 5.0f)
             {
@@ -224,6 +232,7 @@ public class GameManger : MonoBehaviour
     {
         meanu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         Time.timeScale = 1;
     }
 

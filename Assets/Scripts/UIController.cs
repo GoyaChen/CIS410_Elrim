@@ -74,7 +74,7 @@ public class UIController : MonoBehaviour
     public void ShowGameOver(bool success)
     {
         gameOverObj.SetActive(true);
-        gameResultText.text = success ? "GameSuccess" : "GameOver";
+        gameResultText.text = success ? "Mission Complete" : "GameOver";
     }
 
     public void SetHealthBar(int MaxHP, float CurrHP)

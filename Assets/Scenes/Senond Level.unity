@@ -3426,6 +3426,16 @@ PrefabInstance:
       propertyPath: senceID
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: BGM
+      value: 
+      objectReference: {fileID: 154459555}
+    - target: {fileID: 5121666592455050713, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: GameTimeLimit
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 5121666592455050727, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_Name
@@ -4510,11 +4520,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6707684329170145292, guid: b99cec564961c36428033f52e403f55c,
-        type: 3}
-      propertyPath: mouseSensitivity
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99cec564961c36428033f52e403f55c, type: 3}

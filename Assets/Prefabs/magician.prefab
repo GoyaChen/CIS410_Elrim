@@ -606,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 6707684329170145283}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 12.78, y: 0.56, z: 33.81}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2373478946355625740}
   - {fileID: 6707684329170111965}
@@ -671,7 +671,7 @@ MonoBehaviour:
   ismagic: 1
   firstAttactDelay: 1.2
   currHP: 0
-  mouseSensitivity: 100
+  mouseSensitivity: 10
 --- !u!54 &6707684329170145295
 Rigidbody:
   m_ObjectHideFlags: 0
