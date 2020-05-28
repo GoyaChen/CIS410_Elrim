@@ -85,25 +85,12 @@ public class EnemyController : MonoBehaviour
                     isOriginal = false;
                 } 
                 target = attackRangeDetector.target;
-                if (chaosModel)
+                if (target != null)
                 {
-                    if(target != null)
+                    if (target != this.gameObject)
                     {
-                        if (target != this.gameObject)
-                        {
-                            Rotator.LookAt(target.transform.position);
-                            //Rotator.rotation = Quaternion.Slerp(Rotator.rotation, 
-                            // Quaternion.LookRotation((target.transform.position - Rotator.position).normalized),
-                            // rotateSpeed * Time.deltaTime);
-                        }
-                    } 
-                }
-                else
-                {
-                    Rotator.LookAt(player.transform.position);
-                    //Rotator.rotation = Quaternion.Slerp(Rotator.rotation,
-                        //Quaternion.LookRotation((player.transform.position - Rotator.position).normalized),
-                        //rotateSpeed * Time.deltaTime);
+                        Rotator.LookAt(target.transform.position);
+                    }
                 }
                 if (Time.time - lastAttackTime >= attackSpeed)
                 {
@@ -132,7 +119,6 @@ public class EnemyController : MonoBehaviour
                 if (!isOriginal)
                 {
                     Rotator.transform.rotation = originalRotation;
-                    //Rotator.rotation = Quaternion.Slerp(Rotator.rotation, originalRotation, rotateSpeed * Time.deltaTime);
                     isOriginal = true;
                 }
             }

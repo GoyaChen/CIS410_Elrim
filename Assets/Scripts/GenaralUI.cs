@@ -10,6 +10,7 @@ public class GenaralUI : MonoBehaviour
     public Button Level_1;
     public Button Level_2;
     public Button Level_3;
+    [SerializeField] private menuController menu = null;
 
     private void Start()
     {
@@ -18,6 +19,18 @@ public class GenaralUI : MonoBehaviour
         Level_1.onClick.AddListener(runLevel_1);
         Level_2.onClick.AddListener(runLevel_2);
         Level_3.onClick.AddListener(runLevel_3);
+        menu.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menu.isStory = true;
+            menu.gameObject.SetActive(true);
+        }
     }
 
     void runStart()

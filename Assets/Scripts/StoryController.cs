@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class StoryController : MonoBehaviour
 {
-    [SerializeField] private GameObject meanu = null;
-    [SerializeField] private Button topicButton = null;
-    [SerializeField] private Button gameButton = null;
+    [SerializeField] private menuController menu = null;
     public GameObject[] slides;
     public Button Last = null;
     public Button Next = null;
@@ -18,9 +16,7 @@ public class StoryController : MonoBehaviour
 
     private void Start()
     {
-        meanu.SetActive(false);
-        topicButton.onClick.AddListener(returnTopic);
-        gameButton.onClick.AddListener(returnGame);
+        menu.gameObject.SetActive(false);
         StartGame.onClick.AddListener(runStart);
         Last.onClick.AddListener(GoLast);
         Next.onClick.AddListener(GoNext);
@@ -31,11 +27,12 @@ public class StoryController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            meanu.SetActive(true);
+            menu.isStory = true;
+            menu.gameObject.SetActive(true);
         }
     }
 
@@ -47,7 +44,7 @@ public class StoryController : MonoBehaviour
     void GoLast()
     {
         slides[count].SetActive(false);
-        if (count >= 0)
+        if (count > 0)
         {
             count--;
         }
@@ -60,15 +57,5 @@ public class StoryController : MonoBehaviour
             count++;
         }
         slides[count].SetActive(true);
-    }
-
-    private void returnTopic()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
-
-    private void returnGame()
-    {
-        meanu.SetActive(false);
     }
 }

@@ -11,11 +11,6 @@ public class ColliderEvent : MonoBehaviour
 
     void OnTriggerEnter(Collider obj)
     {
-        if (obj.tag == "Player")
-        {
-            playerInRange = true;
-        }
-
         if (self.chaosModel)
         {
             if (obj.tag == "Player" || obj.tag == "Enemy" || obj.tag == "Blocker")
@@ -24,16 +19,34 @@ public class ColliderEvent : MonoBehaviour
                 target = obj.gameObject;
             }
         }
-
+        else
+        {
+            if (obj.tag == "Player")
+            {
+                playerInRange = true;
+                target = obj.gameObject;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider obj)
     {
-        if (obj.tag == "Player")
+        if (self.chaosModel)
         {
-            playerInRange = false;
+            if (obj.tag == "Player" || obj.tag == "Enemy" || obj.tag == "Blocker")
+            {
+                playerInRange = false;
+                target = null;
+            }
         }
-        target = null;
+        else
+        {
+            if (obj.tag == "Player")
+            {
+                playerInRange = false;
+                target = null;
+            }
+        }
     }
 
 }

@@ -31,9 +31,7 @@ public class GameManger : MonoBehaviour
     [SerializeField] private AudioSource failAudio = null; //失败音效
     [SerializeField] private AudioSource BGM = null; 
     [SerializeField] private Slider recoverBar = null; //回血条
-    [SerializeField] private GameObject meanu = null;
-    [SerializeField] private Button topicButton = null;
-    [SerializeField] private Button gameButton = null;
+    [SerializeField] private menuController menu = null;
 
     private int getTargetNum = 0; //获得的目标个数
     private float remainGameTime = 360; //剩余游戏时间
@@ -56,9 +54,7 @@ public class GameManger : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //菜单初始化
-        meanu.SetActive(false);
-        topicButton.onClick.AddListener(returnTopic);
-        gameButton.onClick.AddListener(returnGame);
+        menu.gameObject.SetActive(false);
 
         remainGameTime = GameTimeLimit;
         allTargetObjects = new GameObject[targetObjectsParent.transform.childCount];
@@ -96,7 +92,8 @@ public class GameManger : MonoBehaviour
         UIController.Instance.SetHealthBar(usingPlayer.MaxHealth, usingPlayer.CurrentHealth);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            meanu.SetActive(true);
+            menu.gameObject.SetActive(true);
+            menu.isStory = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
@@ -219,21 +216,4 @@ public class GameManger : MonoBehaviour
         }
         UIController.Instance.UpdateGameTime(Mathf.RoundToInt(remainGameTime)); //更新剩余游戏时间显示
     }
-
-    private void returnTopic()
-    {
-        Cursor.lockState = CursorLockMode.Confined;
-        //UIController.Instance.SetSelectCharacterUI(true);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        Time.timeScale = 1;
-    }
-
-    private void returnGame()
-    {
-        meanu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1;
-    }
-
 }
