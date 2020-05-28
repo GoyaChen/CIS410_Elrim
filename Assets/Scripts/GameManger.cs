@@ -109,6 +109,7 @@ public class GameManger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            menu.isMap = true;
             transformEffect.SetActive(true);
             transformEffect.transform.position = usingPlayer.transform.position + new Vector3(0,3,0);
             transformAudioStart.Play();
@@ -154,7 +155,6 @@ public class GameManger : MonoBehaviour
         usingPlayer.gameObject.SetActive(false);
         usingPlayer = allPlayers[index];
         usingPlayer.gameObject.SetActive(true);
-        
     }
 
     //当关闭选择角色UI
@@ -166,6 +166,7 @@ public class GameManger : MonoBehaviour
         Cursor.visible = false;
         usingPlayer.gameObject.SetActive(true);
         transformEffect.SetActive(false);
+        menu.isMap = false;
     }
 
 

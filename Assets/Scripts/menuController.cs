@@ -13,6 +13,7 @@ public class menuController : MonoBehaviour
     [SerializeField] private Button quitButton = null;
 
     public bool isStory;
+    public bool isMap = false;
 // Start is called before the first frame update
 void Start()
     {
@@ -36,6 +37,13 @@ void Start()
         if (isStory)
         {
             meanu.SetActive(false);
+        }
+        else if (isMap)
+        {
+            meanu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 1;
         }
         else
         {
