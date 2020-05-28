@@ -721,7 +721,7 @@ MonoBehaviour:
   defense: 33
   moveSpeed: 1.5
   rotateSpeed: 1
-  attackSpeed: 1
+  attackSpeed: 1.2
   attackDamage: 200
   explodeDamage: 0
   conDamage: 0
@@ -730,7 +730,7 @@ MonoBehaviour:
   ismagic: 0
   firstAttactDelay: 1.2
   currHP: 0
-  mouseSensitivity: 10
+  mouseSensitivity: 50
 --- !u!54 &8235822230155499558
 Rigidbody:
   m_ObjectHideFlags: 0

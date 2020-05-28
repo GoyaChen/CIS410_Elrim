@@ -671,7 +671,7 @@ MonoBehaviour:
   ismagic: 1
   firstAttactDelay: 1.2
   currHP: 0
-  mouseSensitivity: 10
+  mouseSensitivity: 50
 --- !u!54 &6707684329170145295
 Rigidbody:
   m_ObjectHideFlags: 0
