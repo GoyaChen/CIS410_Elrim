@@ -5475,7 +5475,7 @@ GameObject:
   - component: {fileID: 2980322620421625351}
   m_Layer: 0
   m_Name: BulletHit
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49548,7 +49548,7 @@ GameObject:
   - component: {fileID: 3850427917625044550}
   m_Layer: 0
   m_Name: TowerBullet
-  m_TagString: TowerBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

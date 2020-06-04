@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject Camera = null;
+    [SerializeField] private Camera Camera = null;
     [SerializeField] private Transform DamagerPoint = null;//攻击器产生点（群攻时使用）
     [SerializeField] private GameObject Damager = null;//攻击器（群攻时使用）
     [SerializeField] private Transform bulletPoint = null; //子弹点
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource fireAudio = null;//开火音效
     [SerializeField] private ParticleSystem deadEffect = null;//死亡效果
     [SerializeField] private AudioSource deadAudio = null;//死亡音效
+    [SerializeField] private GameObject notification = null;//提示
 
     [Header("基础数据")]
     [SerializeField]
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;//子弹速度
     public bool ismagic;//是否是魔法攻击
     public float firstAttactDelay;
-    
+    public float mouseSensitivity = 100;
 
     public float currHP;
     private bool isDead;
@@ -40,8 +41,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_Movement;
     private CharacterController characterController = null;
     private float timer;
-    private bool isfirstAttact = true;
-    public float mouseSensitivity = 100;
+    private float normalMoveSpeed;
+    private float aimMoveSpeed;
 
     public float CurrentHealth { get { return currHP; } }
     public int MaxHealth { get { return maxHP; } }
@@ -58,6 +59,8 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         bulletPointRotate();
         fireEffect.gameObject.SetActive(false);
+        normalMoveSpeed = moveSpeed;
+        aimMoveSpeed = moveSpeed / 3;
     }
 
     // Update is called once per frame
@@ -82,6 +85,37 @@ public class PlayerController : MonoBehaviour
         CameraControl();
         Move();
         if(bulletPoint != null && bulletPrefab != null) bulletPointRotate();
+
+        if (Input.GetMouseButton(1))
+        {
+            m_Animator.SetBool("Aiming", true);
+            m_Animator.SetFloat("Speed", 0.0f);
+            moveSpeed = aimMoveSpeed;
+            Camera.fieldOfView = 60;
+        }
+        else
+        {
+            m_Animator.SetBool("Aiming", false);
+            moveSpeed = normalMoveSpeed;
+            Camera.fieldOfView = 90;
+        }
+
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (m_Animator.GetBool("Aiming"))
+            {
+                Attack();
+            }
+            else
+            {
+                GameObject Note = Instantiate(notification);
+                Note.SetActive(true);
+                Destroy(Note, 1.0f);
+            }
+           
+        }
+        /*    
         if (m_Animator.GetBool("Aiming"))
         {
             if (isfirstAttact)
@@ -104,6 +138,7 @@ public class PlayerController : MonoBehaviour
         {
             isfirstAttact = true;
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)
@@ -146,13 +181,11 @@ public class PlayerController : MonoBehaviour
         isWalking = hasHorizontalInput || hasVerticalInput;
         if (isWalking)
         {
-            m_Animator.SetBool("Aiming", false);
             m_Animator.SetFloat("Speed", moveSpeed);
         }
         else
         {
             m_Animator.SetFloat("Speed", 0.0f);
-            m_Animator.SetBool("Aiming", true);
         }
 
         characterController.Move((transform.forward * v + transform.right * h) * Time.deltaTime * moveSpeed*3);
@@ -163,19 +196,19 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxis("Mouse X");
         float y = Input.GetAxis("Mouse Y");
         transform.Rotate(transform.up * x * Time.deltaTime * mouseSensitivity * rotateSpeed, Space.World);
-        Camera.transform.Rotate(-Camera.transform.right * y * Time.deltaTime * mouseSensitivity * rotateSpeed, Space.World);
+        Camera.gameObject.transform.Rotate(-Camera.gameObject.transform.right * y * Time.deltaTime * mouseSensitivity * rotateSpeed, Space.World);
     }
 
     private void bulletPointRotate()
     {
-        Ray ray = new Ray(Camera.transform.position, Camera.transform.forward);
+        Ray ray = new Ray(Camera.gameObject.transform.position, Camera.gameObject.transform.forward);
         Vector3 point = ray.GetPoint(10.0f);
         bulletPoint.LookAt(point);
     }
 
     private void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime >= attackSpeed)
+        if (Time.time - lastAttackTime >= attackSpeed)
         {
             lastAttackTime = Time.time;
             m_Animator.SetTrigger("Attack");

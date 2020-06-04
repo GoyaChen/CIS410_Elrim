@@ -5611,7 +5611,7 @@ MonoBehaviour:
   explodeDamage: 600
   conDamage: 0
   fieldOfFire: 45
-  moveSpeed: 35
+  moveSpeed: 33
   rotateSpeed: 0.2
   rotateAngle: 30
   ismagic: 0
@@ -5763,7 +5763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeDamager: {fileID: 3169553884338977933}
-  rotate_speed: 0.9
+  rotate_speed: 0.3
 --- !u!33 &2984561671734740667
 MeshFilter:
   m_ObjectHideFlags: 0

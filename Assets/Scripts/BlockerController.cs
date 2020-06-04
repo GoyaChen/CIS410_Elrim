@@ -21,6 +21,7 @@ public class BlockerController : MonoBehaviour
     private bool isDead = false;
     private bool isDeadAudioOn;
     private float distance;
+    private float timer;
 
     void Awake()
     {
@@ -52,12 +53,14 @@ public class BlockerController : MonoBehaviour
             if (isDead)
             {
                 if (deadEffect != null) deadEffect.Play();
+                transform.Rotate(new Vector3(-1, 0, 0));
                 if (!isDeadAudioOn)
                 {
                     if (deadAudio != null) deadAudio.Play();
                     isDeadAudioOn = true;
                 }
-                Destroy(gameObject);
+                timer += Time.deltaTime;
+                if (timer > 1.0f) gameObject.SetActive(false);
             }
         }
     }

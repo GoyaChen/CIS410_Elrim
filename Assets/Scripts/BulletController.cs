@@ -86,9 +86,9 @@ public class BulletController : MonoBehaviour
                 if (isDamage)
                 {
                     other.GetComponent<PlayerController>().GetDamage(damage, isDamageMagic);
+                    if (explodeDamager != null) Explode();
                     isDamage = false;
                 }
-                if (explodeDamager != null) Explode();
                 DestroyObj();
             }
             if (other.tag == "Enemy")
@@ -96,9 +96,9 @@ public class BulletController : MonoBehaviour
                 if (isDamage)
                 {
                     other.GetComponent<EnemyController>().GetDamage(damage, isDamageMagic);
+                    if (explodeDamager != null) Explode();
                     isDamage = false;
                 }
-                if (explodeDamager != null) Explode();
                 DestroyObj();
             }
             else if (other.tag == "Blocker")
@@ -106,9 +106,9 @@ public class BulletController : MonoBehaviour
                 if (isDamage)
                 {
                     other.GetComponent<BlockerController>().GetDamage(damage, isDamageMagic);
+                    if (explodeDamager != null) Explode();
                     isDamage = false;
                 }
-                if (explodeDamager != null) Explode();
                 DestroyObj();
             }
         }

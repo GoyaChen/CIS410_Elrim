@@ -122,8 +122,14 @@ public class EnemyController : MonoBehaviour
                     isOriginal = true;
                 }
             }
-
-            distance = (player.transform.position - transform.position).sqrMagnitude;
+            if(target != null)
+            {
+                distance = (target.transform.position - transform.position).sqrMagnitude;
+            }
+            else
+            {
+                distance = (player.transform.position - transform.position).sqrMagnitude;
+            }
             startAngle = -45 * distance / (fieldOfFire * fieldOfFire);
             float visibleDistance = player.fieldOfFire * player.fieldOfFire + 14;
             if (distance < visibleDistance)

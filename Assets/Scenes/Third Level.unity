@@ -806,6 +806,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManger
       objectReference: {fileID: 0}
+    - target: {fileID: 7116473063894654704, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: Swortman
+      value: 
+      objectReference: {fileID: 1713770009}
+    - target: {fileID: 7116473063894654704, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: Archer
+      value: 
+      objectReference: {fileID: 1689429184}
+    - target: {fileID: 7116473063894654704, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: Magician
+      value: 
+      objectReference: {fileID: 537038656}
+    - target: {fileID: 7116473063894654704, guid: 284fbebbc55c6d34fafba247ff942c6e,
+        type: 3}
+      propertyPath: Warlock
+      value: 
+      objectReference: {fileID: 549710035}
     - target: {fileID: 7888501157717573492, guid: 284fbebbc55c6d34fafba247ff942c6e,
         type: 3}
       propertyPath: m_AnchorMax.y
