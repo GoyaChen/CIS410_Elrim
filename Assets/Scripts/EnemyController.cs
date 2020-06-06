@@ -131,6 +131,7 @@ public class EnemyController : MonoBehaviour
                 distance = (player.transform.position - transform.position).sqrMagnitude;
             }
             startAngle = -45 * distance / (fieldOfFire * fieldOfFire);
+            distance = (player.transform.position - transform.position).sqrMagnitude;
             float visibleDistance = player.fieldOfFire * player.fieldOfFire + 14;
             if (distance < visibleDistance)
             {
